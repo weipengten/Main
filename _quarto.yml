@@ -8,11 +8,11 @@ website:
     - text: "Geospatial Analytics"
       menu:
         - text: "Analyzing Bus Traffic Flows in Singapore"
-          href: "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Take-Home_Ex2.qmd"
+          href: "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Take-Home_Ex02.qmd"
     - text: "Visual Analytics"
       menu:
         - text: "Creating Better Visualisations"
-          href: "Visual_Analytics/Creating_Better_Visualisations/Take-Home_Ex2.qmd"
+          href: "Visual_Analytics/Creating_Better_Visualisations/Take-Home_Ex02.qmd"
     right:
       - href: Main.qmd
         text: Home

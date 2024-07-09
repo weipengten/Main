@@ -4,7 +4,7 @@ page-layout: full
 listing:
   - id: Geospatial_Analytics
     contents:
-    - "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows2/*.qmd"
+    - "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/*.qmd"
     type: grid 
 
   - id: Visual_Analytics
@@ -29,14 +29,11 @@ Welcome! In this website, I will be sharing my learning journey on in analytics.
 ## Geospatial Analytics
 
 ::: {#Geospatial_Analytics} :::
-:::
 
 ## Visual Analytics
 
 ::: {#Visual_Analytics} :::
-:::
 
 ## Tableau
 
 ::: {#Tableau} :::
-:::

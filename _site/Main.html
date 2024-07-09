@@ -72,9 +72,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: [{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: [],
+      searchColumns: ["listing-title","listing-author","listing-image","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -177,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-geospatial-analytics">    
         <li>
-    <a class="dropdown-item" href="./Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Take-Home_Ex2.html" rel="" target="">
+    <a class="dropdown-item" href="./Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Take-Home_Ex02.html" rel="" target="">
  <span class="dropdown-text">Analyzing Bus Traffic Flows in Singapore</span></a>
   </li>  
     </ul>
@@ -188,7 +188,7 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-visual-analytics">    
         <li>
-    <a class="dropdown-item" href="./Visual_Analytics/Creating_Better_Visualisations/Take-Home_Ex2.qmd" rel="" target="">
+    <a class="dropdown-item" href="./Visual_Analytics/Creating_Better_Visualisations/Take-Home_Ex02.html" rel="" target="">
  <span class="dropdown-text">Creating Better Visualisations</span></a>
   </li>  
     </ul>
@@ -234,18 +234,47 @@ ul.task-list li input[type="checkbox"] {
 <p>Welcome! In this website, I will be sharing my learning journey on in analytics.</p>
 <section id="geospatial-analytics" class="level2">
 <h2 class="anchored" data-anchor-id="geospatial-analytics">Geospatial Analytics</h2>
-<div id="listing-Geospatial_Analytics" class="quarto-listing quarto-listing-container-grid">
-<div class="list grid quarto-listing-cols-3">
+<p>::: {#Geospatial_Analytics} :::</p>
+</section>
+<section id="visual-analytics" class="level2">
+<h2 class="anchored" data-anchor-id="visual-analytics">Visual Analytics</h2>
+<p>::: {#Visual_Analytics} :::</p>
+</section>
+<section id="tableau" class="level2">
+<h2 class="anchored" data-anchor-id="tableau">Tableau</h2>
+<p>::: {#Tableau} :::</p>
 
+
+
+</section>
+
+<div class="quarto-listing quarto-listing-container-grid" id="listing-Geospatial_Analytics">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1720533100060" data-listing-reading-time-sort="57">
+<a href="./Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Take-Home_Ex02.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img src="Geospatial_Analytics\Analyzing_Bus_Traffic_Flows\Take-Home_Ex02_files\figure-html\unnamed-chunk-12-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Take Home Exercise 2
+</h5>
+<div class="card-text listing-description">
+What are the driving forces behind urban dwellers to weak up early in morning to commute from their home locations to their work places? What are the impact of removing a…
+</div>
+<div class="card-attribution card-text-small start">
+<div class="listing-author">
+
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
 </div>
 <div class="listing-no-matching d-none">
 No matching items
 </div>
-</div>
-</section>
-<section id="visual-analytics" class="level2">
-<h2 class="anchored" data-anchor-id="visual-analytics">Visual Analytics</h2>
-<div id="listing-Visual_Analytics" class="quarto-listing quarto-listing-container-grid">
+</div><div class="quarto-listing quarto-listing-container-grid" id="listing-Visual_Analytics">
 <div class="list grid quarto-listing-cols-3">
 <div class="g-col-1" data-index="0" data-listing-date-sort="1714579200000" data-listing-file-modified-sort="1720532144445" data-listing-date-modified-sort="1720532144000" data-listing-reading-time-sort="16">
 <a href="./Visual_Analytics/Creating_Better_Visualisations/Take-Home_Ex02.html" class="quarto-grid-link">
@@ -274,11 +303,7 @@ May 2, 2024
 <div class="listing-no-matching d-none">
 No matching items
 </div>
-</div>
-</section>
-<section id="tableau" class="level2">
-<h2 class="anchored" data-anchor-id="tableau">Tableau</h2>
-<div id="listing-Tableau" class="quarto-listing quarto-listing-container-grid">
+</div><div class="quarto-listing quarto-listing-container-grid" id="listing-Tableau">
 <div class="list grid quarto-listing-cols-3">
 <div class="g-col-1" data-index="0">
 <a href="" class="quarto-grid-link">
@@ -318,13 +343,7 @@ images/quarterly_price.png
 <div class="listing-no-matching d-none">
 No matching items
 </div>
-</div>
-
-
-
-</section>
-
-</main> <!-- /main -->
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
