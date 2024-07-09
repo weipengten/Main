@@ -4,12 +4,17 @@ page-layout: full
 listing:
   - id: Geospatial Analytics
     contents:
-    - "Geospatial Analytics/Take-Home_Ex2/*.qmd"
+    - "Geospatial_Analytics/Take-Home_Ex2/*.qmd"
     type: grid 
 
   - id: Visual Analytics
     contents:
-    - "Visual Analytics/Take-Home_Ex2/*.qmd"
+    - "Visual_Analytics/Take-Home_Ex2/*.qmd"
+    type: grid
+    
+  - id: Tableau
+    contents:
+    - https://public.tableau.com/app/profile/wei.peng.ten/viz/in-Class_2/QuaterlyPrivateResidentialPropertyWatcher2023-2024Q1#2
     type: grid
 
 toc: false 

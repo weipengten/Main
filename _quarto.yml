@@ -1,10 +1,27 @@
 project:
-  title: "Main"
+  type: website
 
-listing:
-  contents: posts
-  type: grid
-  fields: [date, title, summary]
-  sort: date desc
+website:
+  title: "Wei Peng's Analytics Journey"
+  navbar:
+    left:
+    - text: "Geospatial Analytics"
+      menu:
+        - text: "Analyzing Bus Traffic Flows in Singapore"
+          href: "Geospatial_Analytics/Take-Home_Ex2/Take-Home_Ex2.qmd"
+    - text: "Visual Analytics"
+      menu:
+        - text: "Creating Better Visualisations"
+          href: "Visual_Analytics/Take-Home_Ex2/Take-Home_Ex2.qmd"
+    right:
+      - href: Main.qmd
+        text: Home
+
+format:
+  html:
+    theme: cosmo
+    toc: true
 
 editor: visual
+
+
