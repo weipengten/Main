@@ -1,11 +1,31 @@
 ---
-title: "Main"
+title: "Wei Peng's Analytics Journey"
+page-layout: full
+listing:
+  - id: Geospatial Analytics
+    contents:
+    - "Geospatial Analytics/Take-Home_Ex2/*.qmd"
+    type: grid 
+
+  - id: Visual Analytics
+    contents:
+    - "Visual Analytics/Take-Home_Ex2/*.qmd"
+    type: grid
+
+toc: false 
+number-sections: false
 ---
 
-## Quarto
+Welcome! In this website, I will be sharing my learning journey on in analytics.
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+[![Image by rawpixel.com on Freepik](images/GIS_paranoic-01.png){fig-align="center" width="941"}](https://www.freepik.com/)
 
-```{r}
-1 + 1
-```
+## Geospatial Analytics
+
+::: {#Geospatial Analytics}
+:::
+
+## Visual Analytics
+
+::: {#Visual Analytics}
+:::

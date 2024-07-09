@@ -1,5 +1,10 @@
 project:
   title: "Main"
 
-editor: visual
+listing:
+  contents: posts
+  type: grid
+  fields: [date, title, summary]
+  sort: date desc
 
+editor: visual
