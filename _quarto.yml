@@ -8,20 +8,25 @@ website:
     - text: "Geospatial Analytics"
       menu:
         - text: "Analyzing Bus Traffic Flows in Singapore"
-          href: "Geospatial_Analytics/Take-Home_Ex2/Take-Home_Ex2.qmd"
+          href: "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Take-Home_Ex2.qmd"
     - text: "Visual Analytics"
       menu:
         - text: "Creating Better Visualisations"
-          href: "Visual_Analytics/Take-Home_Ex2/Take-Home_Ex2.qmd"
+          href: "Visual_Analytics/Creating_Better_Visualisations/Take-Home_Ex2.qmd"
     right:
       - href: Main.qmd
         text: Home
 
+
 format:
   html:
-    theme: cosmo
+    theme: sandstone
+    css: styles.css
     toc: true
-
+    toc-title: "On this page"
+    number-sections: true
+    toc-expand: 3
+    toc-depth: 3
+    
 editor: visual
-
 

@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ten Wei Peng">
+<meta name="dcterms.date" content="2024-05-02">
+
+<title>Wei Peng’s Analytics Journey - Take Home Exercise 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Wei Peng’s Analytics Journey</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-geospatial-analytics" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Geospatial Analytics</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-geospatial-analytics">    
+        <li>
+    <a class="dropdown-item" href="../../Geospatial_Analytics/Take-Home_Ex2/Take-Home_Ex2.html" rel="" target="">
+ <span class="dropdown-text">Analyzing Bus Traffic Flows in Singapore</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-visual-analytics" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Visual Analytics</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-visual-analytics">    
+        <li>
+    <a class="dropdown-item" href="../../Visual_Analytics/Take-Home_Ex2/Take-Home_Ex2.qmd" rel="" target="">
+ <span class="dropdown-text">Creating Better Visualisations</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../Main.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> 1. Overview</a></li>
+  <li><a href="#data-visualization-critique" id="toc-data-visualization-critique" class="nav-link" data-scroll-target="#data-visualization-critique"><span class="header-section-number">2</span> 2. Data Visualization Critique</a>
+  <ul class="collapse">
+  <li><a href="#original-design" id="toc-original-design" class="nav-link" data-scroll-target="#original-design"><span class="header-section-number">2.1</span> 2.1 Original Design</a></li>
+  <li><a href="#critique-clarity-and-aesthetics" id="toc-critique-clarity-and-aesthetics" class="nav-link" data-scroll-target="#critique-clarity-and-aesthetics"><span class="header-section-number">2.2</span> 2.2 Critique: Clarity and Aesthetics</a>
+  <ul class="collapse">
+  <li><a href="#clarity" id="toc-clarity" class="nav-link" data-scroll-target="#clarity"><span class="header-section-number">2.2.1</span> <u><strong>Clarity</strong></u></a></li>
+  <li><a href="#aesthetics" id="toc-aesthetics" class="nav-link" data-scroll-target="#aesthetics"><span class="header-section-number">2.2.2</span> <u><strong>Aesthetics</strong></u></a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#makeover-design" id="toc-makeover-design" class="nav-link" data-scroll-target="#makeover-design"><span class="header-section-number">3</span> 3. Makeover Design</a>
+  <ul class="collapse">
+  <li><a href="#proposed-sketch" id="toc-proposed-sketch" class="nav-link" data-scroll-target="#proposed-sketch"><span class="header-section-number">3.1</span> 3.1 Proposed Sketch</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><span class="header-section-number">3.2</span> 3.2 Data Preparation</a>
+  <ul class="collapse">
+  <li><a href="#original-data-preparation-done-by-student" id="toc-original-data-preparation-done-by-student" class="nav-link" data-scroll-target="#original-data-preparation-done-by-student"><span class="header-section-number">3.2.1</span> Original data preparation done by student</a></li>
+  <li><a href="#modifying-the-prepared-data" id="toc-modifying-the-prepared-data" class="nav-link" data-scroll-target="#modifying-the-prepared-data"><span class="header-section-number">3.2.2</span> Modifying the prepared data</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#visualisation" id="toc-visualisation" class="nav-link" data-scroll-target="#visualisation"><span class="header-section-number">4</span> 4. Visualisation</a></li>
+  <li><a href="#learning-points" id="toc-learning-points" class="nav-link" data-scroll-target="#learning-points"><span class="header-section-number">5</span> 5. Learning Points</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Take Home Exercise 2</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ten Wei Peng </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 2, 2024</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">July 9, 2024</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<section id="overview" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 1. Overview</h1>
+<p>In this take-home exercise we are required to:</p>
+<ul>
+<li><p>Select <strong>one data visualisation</strong> from the <a href="https://isss608-ay2023-24apr.netlify.app/take-home_ex/th_ex01#peer-learning">Take-home Exercise 1 submission</a> prepared by your classmate,</p></li>
+<li><p>Critic the submission in terms of clarity and aesthetics, prepare a sketch for the alternative design by using the data visualisation design principles and best practices.</p></li>
+<li><p>Remake the original design by using ggplot2, ggplot2 extensions and tidyverse packages.</p></li>
+</ul>
+<p>For this exercise, I have chosen our classmate <code>ZOU JIAXUN</code>’s visualization in his <a href="https://zoujiaxun.netlify.app/take-home_ex/take-home_ex01/take-home_ex01">Take-home Exercise 1 submission</a> to critique.</p>
+</section>
+<section id="data-visualization-critique" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 2. Data Visualization Critique</h1>
+<section id="original-design" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="original-design"><span class="header-section-number">2.1</span> 2.1 Original Design</h2>
+<p>Figure 1 below shows the original design of the Unit Price ($PSF) for Private Properties in Singapore during the first quarter of 2024.</p>
+<p><img src="images/clipboard-2519206175.png" class="img-fluid"></p>
+</section>
+<section id="critique-clarity-and-aesthetics" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="critique-clarity-and-aesthetics"><span class="header-section-number">2.2</span> 2.2 Critique: Clarity and Aesthetics</h2>
+<section id="clarity" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="clarity"><span class="header-section-number">2.2.1</span> <u><strong>Clarity</strong></u></h3>
+<ul>
+<li><p>This chart fails to demonstrate several observations made by our classmate:</p>
+<p><em>“…a clear disparity emerges between the average unit prices of condominiums and apartments, standing at approximately $1,500 and $2,000, respectively, for the period spanning January to March…”</em></p>
+<ul>
+<li>The chart doesn’t provide clear information about the average unit prices of condominiums and apartments. The absence of labels, compounded by the use of a violin plot that highlights distribution, adds to the complexity.</li>
+</ul>
+<p><em>“…Noteworthy is the discernible uptick in both unit price and transaction volume from January to March 2024…”</em></p>
+<ul>
+<li>Transaction volume is particularly challenging to discern compared to unit price because the y-axis is focused on describing unit prices.</li>
+</ul>
+<p><em>“…Despite an overall reduction in total transactions vis-a-vis the preceding year, there is an unmistakable trend towards growth within specific sub-markets, suggesting an increasing inclination towards higher-value properties…”</em></p>
+<ul>
+<li>The x-axis represents the three months of Q1 2024 instead of displaying transaction volume, a metric frequently referenced by the author. Utilizing the x-axis to depict transaction volume would enhance clarity significantly..</li>
+</ul></li>
+<li><p>Other concerns:</p>
+<p>The title provides a general description but lacks specificity. It does not specify the time period covered by the visualization, nor does it offer insight into the context or main focus of the visualization. A more detailed title and subtitle would enhance clarity and understanding for the audience.</p>
+<p>The x-axis represents the three months of Q1 2024 instead of displaying transaction volume, a metric frequently referenced by the author. Utilizing the x-axis to depict transaction volume would enhance clarity significantly.</p></li>
+</ul>
+</section>
+<section id="aesthetics" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="aesthetics"><span class="header-section-number">2.2.2</span> <u><strong>Aesthetics</strong></u></h3>
+<ul>
+<li><p>The color selection is problematic due to the light-colored background, which matches the hue of the violin plot. This makes it strenuous for the eyes to distinguish between elements.</p></li>
+<li><p>Fonts, titles, x-ticks, and legends are small and difficult to discern.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="makeover-design" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 3. Makeover Design</h1>
+<section id="proposed-sketch" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="proposed-sketch"><span class="header-section-number">3.1</span> 3.1 Proposed Sketch</h2>
+<p>A violin is often not well understood by the general public. In this case, the use of a violin plot is worse as the writer intends to make several comparisons that are not obvious from said plot.</p>
+<p>This scenario seems appropriate for a similar makeover done by <a href="https://isss608-michaeldj.netlify.app/take-home_ex/take-home_ex02/take-home_ex02">Michael Djohan</a> for another student.</p>
+<p>Acknowledging that point plots may distract and add little value, we omitted them. Instead, a modified bar chart resembling a violin plot was adopted. This alternative retains the visual appeal of a violin plot while providing clearer and more informative comparisons. We also decided to add annotations for median prices and transaction volume. A facet plot is used to distinctively compare between the three months for Q1 2024.</p>
+<p><img src="images/WhatsApp Image 2024-05-03 at 17.14.55.jpeg" class="img-fluid"></p>
+</section>
+<section id="data-preparation" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">3.2</span> 3.2 Data Preparation</h2>
+<p>Let us first load the files and merge them into <code>combined_data</code> #Load packages</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Load packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(cowplot, scales, patchwork, tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Import data</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>file_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">"data"</span>, <span class="at">pattern =</span> <span class="st">"*.csv"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>combined_data <span class="ot">&lt;-</span> file_list <span class="sc">%&gt;%</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_df</span>(read_csv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="original-data-preparation-done-by-student" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="original-data-preparation-done-by-student"><span class="header-section-number">3.2.1</span> Original data preparation done by student</h3>
+<p>In this chunk of code, we adopted exactly similar modifications to the data to ensure perfect replication. Nothing new is added here.</p>
+<p>The data preparation here involves:</p>
+<ul>
+<li><p>formatting the <code>Sale Date</code> column into Quarters and Months using the <code>dmy()</code> function from the <code>lubridate</code> package.</p></li>
+<li><p>Removing NA Values</p></li>
+<li><p>Filter for Q1 2024 data only</p></li>
+<li><p>Filter for “Apartment” and “Condominium” only</p></li>
+</ul>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filtering the data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>filtered_data <span class="ot">&lt;-</span> combined_data <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Sale_Date =</span> <span class="fu">dmy</span>(<span class="st">`</span><span class="at">Sale Date</span><span class="st">`</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>((<span class="fu">year</span>(Sale_Date) <span class="sc">==</span> <span class="dv">2023</span> <span class="sc">&amp;</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>          <span class="fu">month</span>(Sale_Date) <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>) <span class="sc">|</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>         (<span class="fu">year</span>(Sale_Date) <span class="sc">==</span> <span class="dv">2024</span> <span class="sc">&amp;</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>          <span class="fu">month</span>(Sale_Date) <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Quarter_Sale_Data =</span> <span class="fu">case_when</span>(</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">between</span>(Sale_Date, <span class="fu">as.Date</span>(<span class="st">"2023-01-01"</span>), <span class="fu">as.Date</span>(<span class="st">"2023-03-31"</span>)) <span class="sc">~</span> <span class="st">"Q1_2023"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">between</span>(Sale_Date, <span class="fu">as.Date</span>(<span class="st">"2023-04-01"</span>), <span class="fu">as.Date</span>(<span class="st">"2023-06-30"</span>)) <span class="sc">~</span> <span class="st">"Q2_2023"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">between</span>(Sale_Date, <span class="fu">as.Date</span>(<span class="st">"2023-07-01"</span>), <span class="fu">as.Date</span>(<span class="st">"2023-09-30"</span>)) <span class="sc">~</span> <span class="st">"Q3_2023"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">between</span>(Sale_Date, <span class="fu">as.Date</span>(<span class="st">"2023-10-01"</span>), <span class="fu">as.Date</span>(<span class="st">"2023-12-31"</span>)) <span class="sc">~</span> <span class="st">"Q4_2023"</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">between</span>(Sale_Date, <span class="fu">as.Date</span>(<span class="st">"2024-01-01"</span>), <span class="fu">as.Date</span>(<span class="st">"2024-03-31"</span>)) <span class="sc">~</span> <span class="st">"Q1_2024"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Quarter_Sale_Data)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Quarter_Sale_Data <span class="sc">==</span> <span class="st">"Q1_2024"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Month_Sale_Data =</span> <span class="fu">paste0</span>(<span class="fu">year</span>(Sale_Date), <span class="st">"-"</span>, <span class="fu">month</span>(Sale_Date))) </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>filtered_data <span class="ot">&lt;-</span> filtered_data <span class="sc">%&gt;%</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Property Type</span><span class="st">`</span> <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Apartment"</span>, <span class="st">"Condominium"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="modifying-the-prepared-data" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="modifying-the-prepared-data"><span class="header-section-number">3.2.2</span> Modifying the prepared data</h3>
+<section id="binning-for-unit-price-psf" class="level4" data-number="3.2.2.1">
+<h4 data-number="3.2.2.1" class="anchored" data-anchor-id="binning-for-unit-price-psf"><span class="header-section-number">3.2.2.1</span> Binning for <code>Unit Price ($ PSF)</code></h4>
+<p>From here on, we begin to make our own modifications which are plenty and necessary. Firstly, we realize that we construct our desired plot we need our <code>Unit Price ($ PSF)</code>to be categorized into bins as <code>Unit_Price_Bin</code></p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating bins</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>breaks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">750</span>, <span class="dv">1000</span>, <span class="dv">1250</span>, <span class="dv">1500</span>, <span class="dv">1750</span>, <span class="dv">2000</span>, <span class="dv">2250</span>, <span class="dv">2500</span>, <span class="dv">2750</span>, <span class="dv">3000</span>, <span class="dv">3250</span>, <span class="dv">3500</span>, <span class="dv">3750</span>, <span class="dv">4000</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>filtered_data <span class="ot">&lt;-</span> filtered_data <span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="st">`</span><span class="at">Unit Price ($ PSF)</span><span class="st">`</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Unit Price ($ PSF)</span><span class="st">`</span> <span class="sc">&lt;=</span> <span class="dv">4000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Unit_Price_Bin =</span> <span class="fu">cut</span>(<span class="st">`</span><span class="at">Unit Price ($ PSF)</span><span class="st">`</span>, </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                              <span class="at">breaks =</span> breaks, </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"751-1000"</span>, <span class="st">"1001-1250"</span>, <span class="st">"1251-1500"</span>, <span class="st">"1501-1750"</span>, <span class="st">"1751-2000"</span>, <span class="st">"2001-2250"</span>, <span class="st">"2251-2500"</span>, <span class="st">"2501-2750"</span>, <span class="st">"2751-3000"</span>, <span class="st">"3001-3250"</span>, <span class="st">"3251-3500"</span>, <span class="st">"3501-3750"</span>, <span class="st">"3751-4000"</span>), </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                              <span class="at">include.lowest =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">right =</span> <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Unit_Price_Bin))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We save our processed data into .rds data format files using the&nbsp;<code>write_rds()</code>&nbsp;of&nbsp;<strong>readr</strong>&nbsp;package. The output file is saved in&nbsp;<em>rds</em>&nbsp;sub-folder. We do this to reduce the loading time and more importantly, we can avoid uploading the large raw files onto GitHub.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(filtered_data, <span class="st">"data/rds/filtered_data.rds"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>filtered_data <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/rds/filtered_data.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="base-data-creation" class="level4" data-number="3.2.2.2">
+<h4 data-number="3.2.2.2" class="anchored" data-anchor-id="base-data-creation"><span class="header-section-number">3.2.2.2</span> Base Data Creation:</h4>
+<p>The code creates a base dataset (<code>base_data</code>) by grouping the filtered data (<code>filtered_data</code>) by month of sale, unit price bin, and property type. It calculates the count of transactions (<code>Count</code>) and assigns negative values to transactions related to apartments (<code>Trans_Vol</code>) to prepare for a pyramid chart.</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating base data for pyramid</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>base_data <span class="ot">&lt;-</span> filtered_data <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Month_Sale_Data, Unit_Price_Bin, <span class="st">`</span><span class="at">Property Type</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Trans_Vol =</span> <span class="fu">ifelse</span>(<span class="st">`</span><span class="at">Property Type</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Apartment"</span>, Count <span class="sc">*</span> (<span class="sc">-</span><span class="dv">1</span>), Count))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="median-unit-price-calculation" class="level4" data-number="3.2.2.3">
+<h4 data-number="3.2.2.3" class="anchored" data-anchor-id="median-unit-price-calculation"><span class="header-section-number">3.2.2.3</span> Median Unit Price Calculation:</h4>
+<p>It computes the median unit price (<code>median_unit_price</code>) for each month and property type combination, adjusting the values for apartments to negative if necessary.</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># median Unit Price</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>UnitPrice_median <span class="ot">&lt;-</span> filtered_data <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Month_Sale_Data, <span class="st">`</span><span class="at">Property Type</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">median_unit_price =</span> <span class="fu">median</span>(<span class="st">`</span><span class="at">Unit Price ($ PSF)</span><span class="st">`</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">median_unit_price =</span> <span class="fu">ifelse</span>(<span class="st">`</span><span class="at">Property Type</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Apartment"</span>, median_unit_price <span class="sc">*</span> (<span class="sc">-</span><span class="dv">1</span>), median_unit_price)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="transaction-volume-aggregation" class="level4" data-number="3.2.2.4">
+<h4 data-number="3.2.2.4" class="anchored" data-anchor-id="transaction-volume-aggregation"><span class="header-section-number">3.2.2.4</span> Transaction Volume Aggregation:</h4>
+<p>The code calculates the maximum and minimum transaction volumes (<code>max_vol, min_vol</code>) for each month and property type, as well as the total transaction volume for each month (<code>sum_transvolume_month</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transvolume_maxmin as transaction volume by month</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>transvolume_maxmin <span class="ot">&lt;-</span> base_data <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Month_Sale_Data,<span class="st">`</span><span class="at">Property Type</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">max_vol =</span> <span class="fu">max</span>(<span class="fu">abs</span>(Trans_Vol)),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_vol =</span> <span class="fu">min</span>(<span class="fu">abs</span>(Trans_Vol))) <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># transvolume_month as total volume by month </span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>transvolume_month <span class="ot">&lt;-</span> base_data <span class="sc">%&gt;%</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Month_Sale_Data) <span class="sc">%&gt;%</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sum_transvolume_month =</span> <span class="fu">sum</span>(<span class="fu">abs</span>(Trans_Vol))) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="total-transaction-volume-by-property-type" class="level4" data-number="3.2.2.5">
+<h4 data-number="3.2.2.5" class="anchored" data-anchor-id="total-transaction-volume-by-property-type"><span class="header-section-number">3.2.2.5</span> Total Transaction Volume by Property Type:</h4>
+<p>It determines the total transaction volume for each unit price bin and property type combination (<code>sum_transvolume_property</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transvolume_property as total transaction volume by property type</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>transvolume_property <span class="ot">&lt;-</span> base_data <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Unit_Price_Bin, <span class="st">`</span><span class="at">Property Type</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sum_transvolume_property =</span> <span class="fu">sum</span>(Trans_Vol)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="joining-tables" class="level4" data-number="3.2.2.6">
+<h4 data-number="3.2.2.6" class="anchored" data-anchor-id="joining-tables"><span class="header-section-number">3.2.2.6</span> Joining Tables</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># joining multiple tables</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>transaction_data <span class="ot">&lt;-</span> base_data <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(transvolume_maxmin, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'Month_Sale_Data'</span>, <span class="st">'Property Type'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(transvolume_month, <span class="at">by =</span> <span class="st">'Month_Sale_Data'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(transvolume_property, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'Unit_Price_Bin'</span>, <span class="st">'Property Type'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(UnitPrice_median, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'Month_Sale_Data'</span>, <span class="st">'Property Type'</span>))</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>transaction_data<span class="sc">$</span>Unit_Price_Bin <span class="ot">&lt;-</span> <span class="fu">factor</span>(transaction_data<span class="sc">$</span>Unit_Price_Bin, <span class="at">exclude =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="signal-creation" class="level4" data-number="3.2.2.7">
+<h4 data-number="3.2.2.7" class="anchored" data-anchor-id="signal-creation"><span class="header-section-number">3.2.2.7</span> Signal Creation:</h4>
+<p>The code generates signals (<code>signal</code>, <code>signal1</code>) to indicate whether a transaction volume or median unit price falls within certain ranges, differentiating between property types. These signals are based on conditions comparing transaction volumes and median unit prices with predefined ranges.</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>transaction_data <span class="ot">&lt;-</span> transaction_data <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">signal =</span> <span class="fu">case_when</span>((min_vol <span class="sc">==</span> <span class="fu">abs</span>(Trans_Vol) <span class="sc">|</span> max_vol <span class="sc">==</span> <span class="fu">abs</span>(Trans_Vol)) <span class="sc">&amp;</span> <span class="st">`</span><span class="at">Property Type</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Apartment"</span> <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                             (min_vol <span class="sc">==</span> <span class="fu">abs</span>(Trans_Vol) <span class="sc">|</span> max_vol <span class="sc">==</span> <span class="fu">abs</span>(Trans_Vol)) <span class="sc">&amp;</span> <span class="st">`</span><span class="at">Property Type</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Condominium"</span> <span class="sc">~</span> <span class="dv">1</span>, <span class="cn">TRUE</span><span class="sc">~</span><span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming `Unit_Price_Bin` is a factor with ordered levels representing price ranges</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">signal1 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Property Type</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Apartment"</span> <span class="sc">&amp;</span> <span class="fu">abs</span>(median_unit_price) <span class="sc">&gt;=</span> <span class="fu">as.numeric</span>(<span class="fu">sub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">-(</span><span class="sc">\\</span><span class="st">d+)$"</span>, <span class="st">""</span>, Unit_Price_Bin)) <span class="sc">&amp;</span> </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">abs</span>(median_unit_price) <span class="sc">&lt;=</span> <span class="fu">as.numeric</span>(<span class="fu">sub</span>(<span class="st">"^</span><span class="sc">\\</span><span class="st">d+</span><span class="sc">\\</span><span class="st">-"</span>, <span class="st">""</span>, Unit_Price_Bin)) <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Property Type</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Condominium"</span> <span class="sc">&amp;</span> <span class="fu">abs</span>(median_unit_price) <span class="sc">&gt;=</span> <span class="fu">as.numeric</span>(<span class="fu">sub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">-(</span><span class="sc">\\</span><span class="st">d+)$"</span>, <span class="st">""</span>, Unit_Price_Bin)) <span class="sc">&amp;</span> </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">abs</span>(median_unit_price) <span class="sc">&lt;=</span> <span class="fu">as.numeric</span>(<span class="fu">sub</span>(<span class="st">"^</span><span class="sc">\\</span><span class="st">d+</span><span class="sc">\\</span><span class="st">-"</span>, <span class="st">""</span>, Unit_Price_Bin)) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co">#Order factors</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>transaction_data<span class="sc">$</span><span class="st">`</span><span class="at">Property Type</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">fct_relevel</span>(transaction_data<span class="sc">$</span><span class="st">`</span><span class="at">Property Type</span><span class="st">`</span>, <span class="st">"Apartment"</span>)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>transaction_data<span class="sc">$</span>Unit_Price_Bin  <span class="ot">&lt;-</span> <span class="fu">fct_relevel</span>(transaction_data<span class="sc">$</span>Unit_Price_Bin, <span class="st">"751-1000"</span>, <span class="st">"1001-1250"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section id="visualisation" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 4. Visualisation</h1>
+<p>This code generates a visualization using ggplot2 to depict the transaction volume and unit price distribution for the first quarter of 2024, comparing apartments and condominiums. Here are the key details:</p>
+<ul>
+<li><p><strong>Plot Components</strong>:</p>
+<ul>
+<li><p><code>geom_col</code>: A column chart is created with Unit_Price_Bin on the x-axis and Trans_Vol (transaction volume) on the y-axis, filled by Property Type.</p></li>
+<li><p><code>geom_text</code>: Text labels are added to the plot to indicate the absolute transaction volume (abs(Trans_Vol)) for significant data points where signal is not zero. The labels are positioned above or below the bars depending on the Property Type.</p></li>
+<li><p>Another <code>geom_text</code> layer adds labels for significant data points based on signal1, showing the median price with labels positioned to the left or right of the bars depending on the Property Type.</p></li>
+</ul></li>
+<li><p><strong>Aesthetics</strong>:</p>
+<ul>
+<li><p>The fill colors for the bars are manually set using scale_fill_manual to distinguish between apartment and condominium properties.</p></li>
+<li><p>Text labels for transaction volume are colored black (color = “black”) to ensure visibility against the bar colors.</p></li>
+</ul></li>
+<li><p><strong>Axis and Labels</strong>:</p>
+<ul>
+<li><p>The y-axis is labeled “Transaction Volume” and is scaled to have breaks at intervals of 100 with a range from -500 to 500.</p></li>
+<li><p>The x-axis is labeled “Unit Price ($PSF)”.</p></li>
+<li><p>Titles, subtitles, and captions are provided for clarity and context.</p></li>
+</ul></li>
+<li><p><strong>Faceting</strong>:</p>
+<ul>
+<li>The plot is facet wrapped by Month_Sale_Data to display separate panels for each month of the first quarter of 2024.</li>
+</ul></li>
+<li><p><strong>Theme Customization</strong>:</p>
+<ul>
+<li>Various theme settings are adjusted for aesthetic purposes, such as removing gridlines, setting strip label appearance, and adjusting panel spacing.</li>
+</ul></li>
+</ul>
+<p>Overall, the visualization effectively presents transaction volume and unit price distributions, allowing for easy comparison between apartment and condominium properties across different months of the first quarter of 2024.</p>
+<div class="cell">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting the axis range and limits</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>tvol_range_breaks <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">200</span>, <span class="dv">200</span>, <span class="dv">100</span>)   </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>tvol_range_limits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">500</span>, <span class="dv">500</span>)  </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> transaction_data) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> Unit_Price_Bin, <span class="at">y =</span> Trans_Vol, <span class="at">fill =</span> <span class="st">`</span><span class="at">Property Type</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> transaction_data[transaction_data<span class="sc">$</span>signal <span class="sc">!=</span> <span class="dv">0</span>, ],</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> Unit_Price_Bin , <span class="at">y =</span> Trans_Vol <span class="sc">+</span> signal <span class="sc">*</span> <span class="dv">5</span>, <span class="at">label =</span> <span class="fu">abs</span>(Trans_Vol),</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">hjust =</span> <span class="fu">ifelse</span>(<span class="st">`</span><span class="at">Property Type</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Apartment"</span>, <span class="fl">1.2</span>, <span class="sc">-</span><span class="fl">0.2</span>)),</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> transaction_data[transaction_data<span class="sc">$</span>signal1 <span class="sc">!=</span> <span class="dv">0</span>, ],</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> Unit_Price_Bin <span class="sc">+</span> signal1 <span class="sc">*</span> <span class="fl">0.5</span>, <span class="at">y =</span> Trans_Vol, </span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Median Price:"</span>, <span class="fu">round</span>(<span class="fu">abs</span>(median_unit_price), <span class="dv">0</span>), <span class="at">sep =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>),</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">hjust =</span> <span class="fu">ifelse</span>(<span class="st">`</span><span class="at">Property Type</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Apartment"</span>, <span class="dv">1</span>, <span class="dv">0</span>)),</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="fl">4.7</span>,</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="fl">2.3</span>,</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span>  <span class="co"># Set text color to black</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Apartment"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>, <span class="st">"Condominium"</span> <span class="ot">=</span> <span class="st">"#f6546a"</span>)) <span class="sc">+</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="st">"Transaction Volume"</span>,</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>                     <span class="at">limits =</span> tvol_range_limits,</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> tvol_range_breaks,</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">paste0</span>(<span class="fu">abs</span>(x))) <span class="sc">+</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="st">"Unit Price ($PSF)"</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"751-1000"</span>, <span class="st">"1001-1250"</span>, <span class="st">"1251-1500"</span>, <span class="st">"1501-1750"</span>, <span class="st">"1751-2000"</span>, <span class="st">"2001-2250"</span>, <span class="st">"2251-2500"</span>, <span class="st">"2501-2750"</span>, <span class="st">"2751-3000"</span>, <span class="st">"3001-3250"</span>, <span class="st">"3251-3500"</span>, <span class="st">"3501-3750"</span>, <span class="st">"3751-4000"</span>, <span class="st">"4001-4250"</span>)) <span class="sc">+</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Transaction Volume and Unit Price Distribution for Q1 2024"</span>,</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">subtitle =</span> <span class="st">"From Jan to Mar 2024, we see a growth within specific sub-markets</span><span class="sc">\n</span><span class="st">suggesting an increasing inclination towards higher-value properties"</span>,</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Data Source: Singapore Housing Market, Q1 2024"</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Month_Sale_Data, <span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span>  </span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">13</span>,</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="dv">42</span>,</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Total Vol:"</span>, sum_transvolume_month, <span class="at">sep =</span> <span class="st">" "</span>)),</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="st">"left"</span>,</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">2.7</span> ) <span class="sc">+</span> </span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">6.5</span>),</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"grey90"</span>),  </span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">face =</span> <span class="st">"bold"</span>),  </span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey90"</span>, <span class="at">linetype =</span> <span class="st">"solid"</span>),</span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey90"</span>, <span class="at">linetype =</span> <span class="st">"solid"</span>),</span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.spacing.x =</span> <span class="fu">unit</span>(<span class="dv">0</span>, <span class="st">"line"</span>),  </span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.spacing.y =</span> <span class="fu">unit</span>(<span class="dv">0</span>, <span class="st">"line"</span>),  </span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),  </span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()  </span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Take-Home_Ex02_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="learning-points" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 5. Learning Points</h1>
+<ol type="1">
+<li><p><strong>Transaction Volume and Unit Price Distribution:</strong></p>
+<ul>
+<li><p><strong>Purpose:</strong> The plot aims to visualize the relationship between transaction volume and unit price distribution for the first quarter of 2024 in the Singapore housing market. Understanding this relationship is crucial for identifying trends and patterns in the market dynamics over time.</p></li>
+<li><p><strong>How it is better:</strong> Labels for total transaction volume is explicitly stated for each month in a visible manner to the addition of the informative distribution plot and median prices are explicitly stated too with min and max prices clearly displayed and indicated on the cahrt.</p></li>
+</ul></li>
+<li><p><strong>Comparison between Apartment and Condominium:</strong></p>
+<ul>
+<li><p><strong>Key Comparison:</strong> The plot compares transaction volume and unit price distribution between apartments and condominiums in the housing market. This comparison is relevant as it the student wanted to demonstrate the shift in tendency towards pricier properties for these two properties respectively.</p></li>
+<li><p><strong>How it is better:</strong> Upon the removal of the point plots, we have less distraction now and have also added contrasting color schemes to both so that it is easier to compare and contrast. It is also evident that the observation made by the student was only relevant from February to March and there was actually a decline in growth in the specific sub-markets for both from January to Fefruary.</p></li>
+</ul></li>
+<li><p><strong>Data Source:</strong></p>
+<ul>
+<li><p><strong>Source:</strong> The data used in the analysis is sourced from the Singapore Housing Market for the first quarter of 2024. This dataset is a reliable and credible source commonly utilized by real estate analysts and researchers to study market trends and dynamics.</p></li>
+<li><p><strong>How it is better:</strong> Mentioning the data source adds credibility to the findings presented in the analysis, reassuring stakeholders of the robustness and reliability of the insights derived.</p></li>
+</ul></li>
+<li><p><strong>Facet Wrap by Month:</strong></p>
+<ul>
+<li><p><strong>Segmentation Rationale:</strong> The data is segmented by month to analyze the transaction volume and unit price distribution trends over time within the first quarter of 2024. This segmentation enables the identification of monthly variations, seasonal patterns, and temporal trends in the housing market.</p></li>
+<li><p><strong>How it is better:</strong> Segmenting the data by month allows us to plot the transaction volume on the x-axis instead and thereby providing additional clarity to the visualisation.</p></li>
+</ul></li>
+<li><p><strong>Total Volume Label:</strong></p>
+<ul>
+<li><p><strong>Significance:</strong> The “Total Vol” label indicates the total transaction volume for each month, providing a summarized view of market activity within the specified timeframe. This label enhances the interpretation of the chart by offering a quantitative measure of the overall market activity, aiding stakeholders in understanding the scale and magnitude of transactions occurring in the housing market.</p></li>
+<li><p><strong>How it is better:</strong> Including the total volume label contextualizes the transaction volume data, allowing stakeholders to quickly grasp the extent of market activity and its implications for market liquidity, demand-supply dynamics, and investment opportunities.</p></li>
+</ul></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

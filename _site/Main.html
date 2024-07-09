@@ -65,20 +65,20 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-Geospatial Analytics .list');
+    const listingTargetEl = window.document.querySelector('#listing-Geospatial_Analytics .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: [{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-image","listing-description"],
+      searchColumns: [],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-Geospatial Analytics'] = new List('listing-Geospatial Analytics', options);
+    window['quarto-listings']['listing-Geospatial_Analytics'] = new List('listing-Geospatial_Analytics', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -93,20 +93,20 @@ ul.task-list li input[type="checkbox"] {
   
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-Visual Analytics .list');
+    const listingTargetEl = window.document.querySelector('#listing-Visual_Analytics .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-image","listing-description"],
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-Visual Analytics'] = new List('listing-Visual Analytics', options);
+    window['quarto-listings']['listing-Visual_Analytics'] = new List('listing-Visual_Analytics', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -128,9 +128,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: [{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-url','listing-title','listing-description','listing-thumbnail',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: [],
+      searchColumns: ["listing-url","listing-title","listing-description","listing-thumbnail"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -151,6 +151,7 @@ ul.task-list li input[type="checkbox"] {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -176,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-geospatial-analytics">    
         <li>
-    <a class="dropdown-item" href="./Geospatial_Analytics/Take-Home_Ex2/Take-Home_Ex2.html" rel="" target="">
+    <a class="dropdown-item" href="./Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Take-Home_Ex2.html" rel="" target="">
  <span class="dropdown-text">Analyzing Bus Traffic Flows in Singapore</span></a>
   </li>  
     </ul>
@@ -187,7 +188,7 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-visual-analytics">    
         <li>
-    <a class="dropdown-item" href="./Visual_Analytics/Take-Home_Ex2/Take-Home_Ex2.html" rel="" target="">
+    <a class="dropdown-item" href="./Visual_Analytics/Creating_Better_Visualisations/Take-Home_Ex2.qmd" rel="" target="">
  <span class="dropdown-text">Creating Better Visualisations</span></a>
   </li>  
     </ul>
@@ -231,84 +232,99 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <p>Welcome! In this website, I will be sharing my learning journey on in analytics.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://www.freepik.com/"><img src="images/GIS_paranoic-01.png" class="img-fluid figure-img" width="941"></a></p>
-<figcaption class="figure-caption">Image by rawpixel.com on Freepik</figcaption>
-</figure>
-</div>
 <section id="geospatial-analytics" class="level2">
 <h2 class="anchored" data-anchor-id="geospatial-analytics">Geospatial Analytics</h2>
-<p>::: {#Geospatial Analytics} :::</p>
+<div id="listing-Geospatial_Analytics" class="quarto-listing quarto-listing-container-grid">
+<div class="list grid quarto-listing-cols-3">
+
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
 </section>
 <section id="visual-analytics" class="level2">
 <h2 class="anchored" data-anchor-id="visual-analytics">Visual Analytics</h2>
-<p>::: {#Visual Analytics} :::</p>
+<div id="listing-Visual_Analytics" class="quarto-listing quarto-listing-container-grid">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-listing-date-sort="1714579200000" data-listing-file-modified-sort="1720532144445" data-listing-date-modified-sort="1720532144000" data-listing-reading-time-sort="16">
+<a href="./Visual_Analytics/Creating_Better_Visualisations/Take-Home_Ex02.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img src="Visual_Analytics\Creating_Better_Visualisations\images\clipboard-2519206175.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Take Home Exercise 2
+</h5>
+<div class="card-text listing-description">
+In this take-home exercise we are required to:
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Ten Wei Peng
+</div>
+<div class="listing-date">
+May 2, 2024
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+<section id="tableau" class="level2">
+<h2 class="anchored" data-anchor-id="tableau">Tableau</h2>
+<div id="listing-Tableau" class="quarto-listing quarto-listing-container-grid">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0">
+<a href="" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Quarterly Private Residential Property Watcher
+</h5>
+<div class="card-text listing-description">
+Tableau Visualization
+</div>
+
+<table class="card-other-values">
+<tbody><tr>
+<td>
+url
+</td>
+<td class="url">
+https://public.tableau.com/app/profile/wei.peng.ten/viz/in-Class_2/QuaterlyPrivateResidentialPropertyWatcher2023-2024Q1#2
+</td>
+</tr>
+<tr>
+<td>
+thumbnail
+</td>
+<td class="thumbnail">
+images/quarterly_price.png
+</td>
+</tr>
+
+</tbody></table>
+</div>
+</div>
+</a>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
 
 
 
 </section>
 
-<div class="quarto-listing quarto-listing-container-grid" id="listing-Geospatial Analytics">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1720529582475" data-listing-reading-time-sort="57">
-<a href="./Geospatial_Analytics/Take-Home_Ex2/Take-Home_Ex2.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="Geospatial_Analytics\Take-Home_Ex2\Take-Home_Ex2_files\figure-html\unnamed-chunk-12-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Take Home Exercise 2
-</h5>
-<div class="card-text listing-description">
-What are the driving forces behind urban dwellers to weak up early in morning to commute from their home locations to their work places? What are the impact of removing a…
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div><div class="quarto-listing quarto-listing-container-grid" id="listing-Visual Analytics">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1720529630106" data-listing-reading-time-sort="57">
-<a href="./Visual_Analytics/Take-Home_Ex2/Take-Home_Ex2.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="Visual_Analytics\Take-Home_Ex2\Take-Home_Ex2_files\figure-html\unnamed-chunk-12-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Take Home Exercise 2
-</h5>
-<div class="card-text listing-description">
-What are the driving forces behind urban dwellers to weak up early in morning to commute from their home locations to their work places? What are the impact of removing a…
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div><div class="quarto-listing quarto-listing-container-grid" id="listing-Tableau">
-<div class="list grid quarto-listing-cols-3">
-
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
