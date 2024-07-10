@@ -67,21 +67,21 @@
     "href": "Main.html#geospatial-analytics",
     "title": "Wei Peng’s Analytics Journey",
     "section": "Geospatial Analytics",
-    "text": "Geospatial Analytics\n::: {#Geospatial_Analytics} :::"
+    "text": "Geospatial Analytics\n\n\n\n\n\n\n\n\nTake Home Exercise 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "Main.html#visual-analytics",
     "href": "Main.html#visual-analytics",
     "title": "Wei Peng’s Analytics Journey",
     "section": "Visual Analytics",
-    "text": "Visual Analytics\n::: {#Visual_Analytics} :::"
+    "text": "Visual Analytics\n\n\n\n\n\n\n\n\nTake Home Exercise 2\n\n\n\n\n\n\nTen Wei Peng\n\n\nMay 2, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "Main.html#tableau",
     "href": "Main.html#tableau",
     "title": "Wei Peng’s Analytics Journey",
     "section": "Tableau",
-    "text": "Tableau\n::: {#Tableau} :::"
+    "text": "Tableau\n\n\n\n\n\n\n\nQuarterly Private Residential Property Watcher\n\n\nTableau Visualization\n\n\n\n\n\nurl\n\n\nhttps://public.tableau.com/app/profile/wei.peng.ten/viz/in-Class_2/QuaterlyPrivateResidentialPropertyWatcher2023-2024Q1#2\n\n\n\n\nthumbnail\n\n\nimages/quarterly_price.png\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "Geospatial_Analytics/Take-Home_Ex2/data/geospatial/Retails.html",
@@ -390,5 +390,152 @@
     "title": "Take Home Exercise 2",
     "section": "4.2 Spatial Interaction Modelling",
     "text": "4.2 Spatial Interaction Modelling\n\nCalibrate spatial interactive models to determine factors affecting urban commuting flows at the selected time interval.\nPresent the modelling results by using appropriate geovisualisation and graphical visualisation methods. (Not more than 5 visuals)\nWith reference to the Spatial Interaction Model output tables, maps and data visualisation prepared, describe the modelling results. (not more than 100 words per visual)."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Wei Peng’s Analytics Journey",
+    "section": "",
+    "text": "Welcome! In this website, I will be sharing my learning journey in analytics."
+  },
+  {
+    "objectID": "index.html#geospatial-analytics",
+    "href": "index.html#geospatial-analytics",
+    "title": "Wei Peng’s Analytics Journey",
+    "section": "Geospatial Analytics",
+    "text": "Geospatial Analytics\n\n\n\n\n\n\n\n\nTake Home Exercise 2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html#visual-analytics",
+    "href": "index.html#visual-analytics",
+    "title": "Wei Peng’s Analytics Journey",
+    "section": "Visual Analytics",
+    "text": "Visual Analytics\n\n\n\n\n\n\n\n\nTake Home Exercise 2\n\n\n\n\n\n\nTen Wei Peng\n\n\nMay 2, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html#tableau",
+    "href": "index.html#tableau",
+    "title": "Wei Peng’s Analytics Journey",
+    "section": "Tableau",
+    "text": "Tableau\n\n\n\n\n\n\n\nQuarterly Private Residential Property Watcher\n\n\nTableau Visualization\n\n\n\n\n\nurl\n\n\nhttps://public.tableau.com/app/profile/wei.peng.ten/viz/in-Class_2/QuaterlyPrivateResidentialPropertyWatcher2023-2024Q1#2\n\n\n\n\nthumbnail\n\n\nimages/quarterly_price.png\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Take-Home_Ex02.knit.html",
+    "href": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Take-Home_Ex02.knit.html",
+    "title": "Take Home Exercise 2",
+    "section": "",
+    "text": "What are the driving forces behind urban dwellers to weak up early in morning to commute from their home locations to their work places? What are the impact of removing a public bus service on the commuters reside along the corridor of the bus route? These and many other questions related to urban mobility are challenges faced by transport operators and urban managers.\nTo provide answer to this question, traditionally, commuters survey will be used. However, commuters survey is a very costly, time-consuming and laborous, not to mention that the survey data tend to take a long time to clean and analyse. As a result, it is not unusual, by the time the survey report was ready, most of the information already out-of-date!\nAs city-wide urban infrastructures such as public buses, mass rapid transits, public utilities and roads become digital, the data sets obtained can be used as a framework for tracking movement patterns through space and time. This is particularly true with the recent trend of massive deployment of pervasive computing technologies such as GPS on the vehicles and SMART cards used by public transport commuters.\nUnfortunately, this explosive growth of geospatially-referenced data has far outpaced the planner’s ability to utilize and transform the data into insightful information thus creating an adverse impact on the return on the investment made to collect and manage this data."
+  },
+  {
+    "objectID": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Take-Home_Ex02.knit.html#open-government-data",
+    "href": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Take-Home_Ex02.knit.html#open-government-data",
+    "title": "Take Home Exercise 2",
+    "section": "3.1 Open Government Data",
+    "text": "3.1 Open Government Data\nFor the purpose of this assignment, data from several open government sources will be used:\n\nPassenger Volume by Origin Destination Bus Stops, Bus Stop Location, Train Station and Train Station Exit Point, just to name a few of them, from LTA DataMall.\nMaster Plan 2019 Subzone Boundary, HDB Property Information, School Directory and Information and other relevant data from Data.gov.sg."
+  },
+  {
+    "objectID": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Take-Home_Ex02.knit.html#specially-collected-data",
+    "href": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Take-Home_Ex02.knit.html#specially-collected-data",
+    "title": "Take Home Exercise 2",
+    "section": "3.2 Specially collected data",
+    "text": "3.2 Specially collected data\n\nBusiness, entertn, F&B, FinServ, Leisure&Recreation and Retails are geospatial data sets of the locations of business establishments, entertainments, food and beverage outlets, financial centres, leisure and recreation centres, retail and services stores/outlets I compiled for urban mobility study. They are available on in the geospatial folder to Take-home Exercise 2 data folder.\nHDB: This data set is the geocoded version of HDB Property Information data from data.gov. The data set is prepared using September 2021 data. If you want to prepare you own data by using the latest HDB Property Information provided on data.gov.sg, this link provides a useful step-by-step guide."
+  },
+  {
+    "objectID": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Take-Home_Ex02.knit.html#geospatial-data-science",
+    "href": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Take-Home_Ex02.knit.html#geospatial-data-science",
+    "title": "Take Home Exercise 2",
+    "section": "4.1 Geospatial Data Science",
+    "text": "4.1 Geospatial Data Science\n\nDerive an analytical hexagon data of 375m (this distance is the perpendicular distance between the centre of the hexagon and its edges) to represent the traffic analysis zone (TAZ).\nWith reference to the time intervals provided in the table below, construct an O-D matrix of commuter flows for a time interval of your choice by integrating Passenger Volume by Origin Destination Bus Stops and Bus Stop Location from LTA DataMall. The O-D matrix must be aggregated at the analytics hexagon level\n\n\n\nPeak hour period\nBus tap on time\n\n\n\n\nWeekday morning peak\n6am to 9am\n\n\nWeekday afternoon peak\n5pm to 8pm\n\n\nWeekend/holiday morning peak\n11am to 2pm\n\n\nWeekend/holiday evening peak\n4pm to 7pm\n\n\n\nDisplay the O-D flows of the passenger trips by using appropriate geovisualisation methods (not more than 5 maps).\nDescribe the spatial patterns revealed by the geovisualisation (not more than 100 words per visual).\nAssemble at least three propulsive and three attractiveness variables by using aspatial and geospatial from publicly available sources.\nCompute a distance matrix by using the analytical hexagon data derived earlier."
+  },
+  {
+    "objectID": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Take-Home_Ex02.knit.html#spatial-interaction-modelling",
+    "href": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Take-Home_Ex02.knit.html#spatial-interaction-modelling",
+    "title": "Take Home Exercise 2",
+    "section": "4.2 Spatial Interaction Modelling",
+    "text": "4.2 Spatial Interaction Modelling\n\nCalibrate spatial interactive models to determine factors affecting urban commuting flows at the selected time interval.\nPresent the modelling results by using appropriate geovisualisation and graphical visualisation methods. (Not more than 5 visuals)\nWith reference to the Spatial Interaction Model output tables, maps and data visualisation prepared, describe the modelling results. (not more than 100 words per visual)."
+  },
+  {
+    "objectID": "index.html#analysis-using-rstudio",
+    "href": "index.html#analysis-using-rstudio",
+    "title": "Wei Peng’s Analytics Journey",
+    "section": "Analysis using RStudio",
+    "text": "Analysis using RStudio\n\nRStudio\n\n\n\n\n\n\n\n\nAnalyzing Bus Traffic Flows in Singapore\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCreating Better Visualisations\n\n\n\n\n\n\nTen Wei Peng\n\n\nMay 2, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "Visual_Analytics/Creating_Better_Visualisations/Creating_Better_Visualisations.html",
+    "href": "Visual_Analytics/Creating_Better_Visualisations/Creating_Better_Visualisations.html",
+    "title": "Take Home Exercise 2",
+    "section": "",
+    "text": "In this take-home exercise we are required to:\n\nSelect one data visualisation from the Take-home Exercise 1 submission prepared by your classmate,\nCritic the submission in terms of clarity and aesthetics, prepare a sketch for the alternative design by using the data visualisation design principles and best practices.\nRemake the original design by using ggplot2, ggplot2 extensions and tidyverse packages.\n\nFor this exercise, I have chosen our classmate ZOU JIAXUN’s visualization in his Take-home Exercise 1 submission to critique."
+  },
+  {
+    "objectID": "Visual_Analytics/Creating_Better_Visualisations/Creating_Better_Visualisations.html#original-design",
+    "href": "Visual_Analytics/Creating_Better_Visualisations/Creating_Better_Visualisations.html#original-design",
+    "title": "Take Home Exercise 2",
+    "section": "2.1 2.1 Original Design",
+    "text": "2.1 2.1 Original Design\nFigure 1 below shows the original design of the Unit Price ($PSF) for Private Properties in Singapore during the first quarter of 2024."
+  },
+  {
+    "objectID": "Visual_Analytics/Creating_Better_Visualisations/Creating_Better_Visualisations.html#critique-clarity-and-aesthetics",
+    "href": "Visual_Analytics/Creating_Better_Visualisations/Creating_Better_Visualisations.html#critique-clarity-and-aesthetics",
+    "title": "Take Home Exercise 2",
+    "section": "2.2 2.2 Critique: Clarity and Aesthetics",
+    "text": "2.2 2.2 Critique: Clarity and Aesthetics\n\n2.2.1 Clarity\n\nThis chart fails to demonstrate several observations made by our classmate:\n“…a clear disparity emerges between the average unit prices of condominiums and apartments, standing at approximately $1,500 and $2,000, respectively, for the period spanning January to March…”\n\nThe chart doesn’t provide clear information about the average unit prices of condominiums and apartments. The absence of labels, compounded by the use of a violin plot that highlights distribution, adds to the complexity.\n\n“…Noteworthy is the discernible uptick in both unit price and transaction volume from January to March 2024…”\n\nTransaction volume is particularly challenging to discern compared to unit price because the y-axis is focused on describing unit prices.\n\n“…Despite an overall reduction in total transactions vis-a-vis the preceding year, there is an unmistakable trend towards growth within specific sub-markets, suggesting an increasing inclination towards higher-value properties…”\n\nThe x-axis represents the three months of Q1 2024 instead of displaying transaction volume, a metric frequently referenced by the author. Utilizing the x-axis to depict transaction volume would enhance clarity significantly..\n\nOther concerns:\nThe title provides a general description but lacks specificity. It does not specify the time period covered by the visualization, nor does it offer insight into the context or main focus of the visualization. A more detailed title and subtitle would enhance clarity and understanding for the audience.\nThe x-axis represents the three months of Q1 2024 instead of displaying transaction volume, a metric frequently referenced by the author. Utilizing the x-axis to depict transaction volume would enhance clarity significantly.\n\n\n\n2.2.2 Aesthetics\n\nThe color selection is problematic due to the light-colored background, which matches the hue of the violin plot. This makes it strenuous for the eyes to distinguish between elements.\nFonts, titles, x-ticks, and legends are small and difficult to discern."
+  },
+  {
+    "objectID": "Visual_Analytics/Creating_Better_Visualisations/Creating_Better_Visualisations.html#proposed-sketch",
+    "href": "Visual_Analytics/Creating_Better_Visualisations/Creating_Better_Visualisations.html#proposed-sketch",
+    "title": "Take Home Exercise 2",
+    "section": "3.1 3.1 Proposed Sketch",
+    "text": "3.1 3.1 Proposed Sketch\nA violin is often not well understood by the general public. In this case, the use of a violin plot is worse as the writer intends to make several comparisons that are not obvious from said plot.\nThis scenario seems appropriate for a similar makeover done by Michael Djohan for another student.\nAcknowledging that point plots may distract and add little value, we omitted them. Instead, a modified bar chart resembling a violin plot was adopted. This alternative retains the visual appeal of a violin plot while providing clearer and more informative comparisons. We also decided to add annotations for median prices and transaction volume. A facet plot is used to distinctively compare between the three months for Q1 2024."
+  },
+  {
+    "objectID": "Visual_Analytics/Creating_Better_Visualisations/Creating_Better_Visualisations.html#data-preparation",
+    "href": "Visual_Analytics/Creating_Better_Visualisations/Creating_Better_Visualisations.html#data-preparation",
+    "title": "Take Home Exercise 2",
+    "section": "3.2 3.2 Data Preparation",
+    "text": "3.2 3.2 Data Preparation\nLet us first load the files and merge them into combined_data #Load packages\n\n\nShow the code\n#Load packages\npacman::p_load(cowplot, scales, patchwork, tidyverse)\n\n#Import data\nfile_list &lt;- list.files(path = \"data\", pattern = \"*.csv\", full.names = TRUE)\ncombined_data &lt;- file_list %&gt;%\n  map_df(read_csv)\n\n\n\n3.2.1 Original data preparation done by student\nIn this chunk of code, we adopted exactly similar modifications to the data to ensure perfect replication. Nothing new is added here.\nThe data preparation here involves:\n\nformatting the Sale Date column into Quarters and Months using the dmy() function from the lubridate package.\nRemoving NA Values\nFilter for Q1 2024 data only\nFilter for “Apartment” and “Condominium” only\n\n\n\nShow the code\n# filtering the data\nfiltered_data &lt;- combined_data %&gt;%\n  mutate(Sale_Date = dmy(`Sale Date`)) %&gt;%\n  filter((year(Sale_Date) == 2023 & \n          month(Sale_Date) %in% 1:12) |\n         (year(Sale_Date) == 2024 & \n          month(Sale_Date) %in% 1:3)) %&gt;%\n  mutate(Quarter_Sale_Data = case_when(\n    between(Sale_Date, as.Date(\"2023-01-01\"), as.Date(\"2023-03-31\")) ~ \"Q1_2023\",\n    between(Sale_Date, as.Date(\"2023-04-01\"), as.Date(\"2023-06-30\")) ~ \"Q2_2023\",\n    between(Sale_Date, as.Date(\"2023-07-01\"), as.Date(\"2023-09-30\")) ~ \"Q3_2023\",\n    between(Sale_Date, as.Date(\"2023-10-01\"), as.Date(\"2023-12-31\")) ~ \"Q4_2023\",\n    between(Sale_Date, as.Date(\"2024-01-01\"), as.Date(\"2024-03-31\")) ~ \"Q1_2024\",\n    TRUE ~ NA_character_\n  )) %&gt;%\n  filter(!is.na(Quarter_Sale_Data)) %&gt;%\n  filter(Quarter_Sale_Data == \"Q1_2024\") %&gt;%\n  mutate(Month_Sale_Data = paste0(year(Sale_Date), \"-\", month(Sale_Date))) \n\nfiltered_data &lt;- filtered_data %&gt;%\n  filter(`Property Type` %in% c(\"Apartment\", \"Condominium\"))\n\n\n\n\n3.2.2 Modifying the prepared data\n\n3.2.2.1 Binning for Unit Price ($ PSF)\nFrom here on, we begin to make our own modifications which are plenty and necessary. Firstly, we realize that we construct our desired plot we need our Unit Price ($ PSF)to be categorized into bins as Unit_Price_Bin\n\n\nShow the code\n# Creating bins\nbreaks &lt;- c(750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, 3250, 3500, 3750, 4000)\n\nfiltered_data &lt;- filtered_data %&gt;%\n  filter(!is.na(`Unit Price ($ PSF)`)) %&gt;%\n  filter(`Unit Price ($ PSF)` &lt;= 4000) %&gt;%\n  mutate(Unit_Price_Bin = cut(`Unit Price ($ PSF)`, \n                              breaks = breaks, \n                              labels = c(\"751-1000\", \"1001-1250\", \"1251-1500\", \"1501-1750\", \"1751-2000\", \"2001-2250\", \"2251-2500\", \"2501-2750\", \"2751-3000\", \"3001-3250\", \"3251-3500\", \"3501-3750\", \"3751-4000\"), \n                              include.lowest = TRUE,\n                              right = FALSE)) %&gt;%\n  filter(!is.na(Unit_Price_Bin))\n\n\nWe save our processed data into .rds data format files using the write_rds() of readr package. The output file is saved in rds sub-folder. We do this to reduce the loading time and more importantly, we can avoid uploading the large raw files onto GitHub.\n\nwrite_rds(filtered_data, \"data/rds/filtered_data.rds\")\nfiltered_data &lt;- read_rds(\"data/rds/filtered_data.rds\")\n\n\n\n3.2.2.2 Base Data Creation:\nThe code creates a base dataset (base_data) by grouping the filtered data (filtered_data) by month of sale, unit price bin, and property type. It calculates the count of transactions (Count) and assigns negative values to transactions related to apartments (Trans_Vol) to prepare for a pyramid chart.\n\n\nShow the code\n# Creating base data for pyramid\nbase_data &lt;- filtered_data %&gt;%\n  group_by(Month_Sale_Data, Unit_Price_Bin, `Property Type`) %&gt;%\n  summarise(Count = n()) %&gt;%\n  ungroup() %&gt;%\n  mutate(Trans_Vol = ifelse(`Property Type` == \"Apartment\", Count * (-1), Count))\n\n\n\n\n3.2.2.3 Median Unit Price Calculation:\nIt computes the median unit price (median_unit_price) for each month and property type combination, adjusting the values for apartments to negative if necessary.\n\n\nShow the code\n# median Unit Price\nUnitPrice_median &lt;- filtered_data %&gt;%\n  group_by(Month_Sale_Data, `Property Type`) %&gt;%\n  summarise(median_unit_price = median(`Unit Price ($ PSF)`)) %&gt;%\n  mutate(median_unit_price = ifelse(`Property Type` == \"Apartment\", median_unit_price * (-1), median_unit_price)) %&gt;%\n  ungroup()\n\n\n\n\n3.2.2.4 Transaction Volume Aggregation:\nThe code calculates the maximum and minimum transaction volumes (max_vol, min_vol) for each month and property type, as well as the total transaction volume for each month (sum_transvolume_month).\n\n# transvolume_maxmin as transaction volume by month\ntransvolume_maxmin &lt;- base_data %&gt;%\n  group_by(Month_Sale_Data,`Property Type`) %&gt;%\n  summarise(max_vol = max(abs(Trans_Vol)),\n            min_vol = min(abs(Trans_Vol))) %&gt;%\n  ungroup()\n\n# transvolume_month as total volume by month \ntransvolume_month &lt;- base_data %&gt;%\n  group_by(Month_Sale_Data) %&gt;%\n  summarise(sum_transvolume_month = sum(abs(Trans_Vol))) %&gt;% \n  ungroup()\n\n\n\n3.2.2.5 Total Transaction Volume by Property Type:\nIt determines the total transaction volume for each unit price bin and property type combination (sum_transvolume_property).\n\n# transvolume_property as total transaction volume by property type\ntransvolume_property &lt;- base_data %&gt;%\n  group_by(Unit_Price_Bin, `Property Type`) %&gt;%\n  summarise(sum_transvolume_property = sum(Trans_Vol)) %&gt;%\n  ungroup()\n\n\n\n3.2.2.6 Joining Tables\n\n# joining multiple tables\ntransaction_data &lt;- base_data %&gt;%\n  left_join(transvolume_maxmin, by = c('Month_Sale_Data', 'Property Type')) %&gt;%\n  left_join(transvolume_month, by = 'Month_Sale_Data') %&gt;%\n  left_join(transvolume_property, by = c('Unit_Price_Bin', 'Property Type')) %&gt;%\n  left_join(UnitPrice_median, by = c('Month_Sale_Data', 'Property Type'))\n\ntransaction_data$Unit_Price_Bin &lt;- factor(transaction_data$Unit_Price_Bin, exclude = NULL)\n\n\n\n3.2.2.7 Signal Creation:\nThe code generates signals (signal, signal1) to indicate whether a transaction volume or median unit price falls within certain ranges, differentiating between property types. These signals are based on conditions comparing transaction volumes and median unit prices with predefined ranges.\n\n\nShow the code\ntransaction_data &lt;- transaction_data %&gt;%\n   mutate(signal = case_when((min_vol == abs(Trans_Vol) | max_vol == abs(Trans_Vol)) & `Property Type` == \"Apartment\" ~ -1,\n                             (min_vol == abs(Trans_Vol) | max_vol == abs(Trans_Vol)) & `Property Type` == \"Condominium\" ~ 1, TRUE~0)) %&gt;%\n\n# Assuming `Unit_Price_Bin` is a factor with ordered levels representing price ranges\n\nmutate(signal1 = case_when(\n    `Property Type` == \"Apartment\" & abs(median_unit_price) &gt;= as.numeric(sub(\"\\\\-(\\\\d+)$\", \"\", Unit_Price_Bin)) & \n    abs(median_unit_price) &lt;= as.numeric(sub(\"^\\\\d+\\\\-\", \"\", Unit_Price_Bin)) ~ -1,\n    \n    `Property Type` == \"Condominium\" & abs(median_unit_price) &gt;= as.numeric(sub(\"\\\\-(\\\\d+)$\", \"\", Unit_Price_Bin)) & \n    abs(median_unit_price) &lt;= as.numeric(sub(\"^\\\\d+\\\\-\", \"\", Unit_Price_Bin)) ~ 1,\n    \n    TRUE ~ 0\n))\n\n\n#Order factors\ntransaction_data$`Property Type` &lt;- fct_relevel(transaction_data$`Property Type`, \"Apartment\")\ntransaction_data$Unit_Price_Bin  &lt;- fct_relevel(transaction_data$Unit_Price_Bin, \"751-1000\", \"1001-1250\")"
+  },
+  {
+    "objectID": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Analyzing_Bus_Traffic_Flows.html",
+    "href": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Analyzing_Bus_Traffic_Flows.html",
+    "title": "Analyzing Bus Traffic Flows in Singapore",
+    "section": "",
+    "text": "What are the driving forces behind urban dwellers to weak up early in morning to commute from their home locations to their work places? What are the impact of removing a public bus service on the commuters reside along the corridor of the bus route? These and many other questions related to urban mobility are challenges faced by transport operators and urban managers.\nTo provide answer to this question, traditionally, commuters survey will be used. However, commuters survey is a very costly, time-consuming and laborous, not to mention that the survey data tend to take a long time to clean and analyse. As a result, it is not unusual, by the time the survey report was ready, most of the information already out-of-date!\nAs city-wide urban infrastructures such as public buses, mass rapid transits, public utilities and roads become digital, the data sets obtained can be used as a framework for tracking movement patterns through space and time. This is particularly true with the recent trend of massive deployment of pervasive computing technologies such as GPS on the vehicles and SMART cards used by public transport commuters.\nUnfortunately, this explosive growth of geospatially-referenced data has far outpaced the planner’s ability to utilize and transform the data into insightful information thus creating an adverse impact on the return on the investment made to collect and manage this data."
+  },
+  {
+    "objectID": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Analyzing_Bus_Traffic_Flows.html#open-government-data",
+    "href": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Analyzing_Bus_Traffic_Flows.html#open-government-data",
+    "title": "Analyzing Bus Traffic Flows in Singapore",
+    "section": "3.1 Open Government Data",
+    "text": "3.1 Open Government Data\nFor the purpose of this assignment, data from several open government sources will be used:\n\nPassenger Volume by Origin Destination Bus Stops, Bus Stop Location, Train Station and Train Station Exit Point, just to name a few of them, from LTA DataMall.\nMaster Plan 2019 Subzone Boundary, HDB Property Information, School Directory and Information and other relevant data from Data.gov.sg."
+  },
+  {
+    "objectID": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Analyzing_Bus_Traffic_Flows.html#specially-collected-data",
+    "href": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Analyzing_Bus_Traffic_Flows.html#specially-collected-data",
+    "title": "Analyzing Bus Traffic Flows in Singapore",
+    "section": "3.2 Specially collected data",
+    "text": "3.2 Specially collected data\n\nBusiness, entertn, F&B, FinServ, Leisure&Recreation and Retails are geospatial data sets of the locations of business establishments, entertainments, food and beverage outlets, financial centres, leisure and recreation centres, retail and services stores/outlets I compiled for urban mobility study. They are available on in the geospatial folder to Take-home Exercise 2 data folder.\nHDB: This data set is the geocoded version of HDB Property Information data from data.gov. The data set is prepared using September 2021 data. If you want to prepare you own data by using the latest HDB Property Information provided on data.gov.sg, this link provides a useful step-by-step guide."
+  },
+  {
+    "objectID": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Analyzing_Bus_Traffic_Flows.html#geospatial-data-science",
+    "href": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Analyzing_Bus_Traffic_Flows.html#geospatial-data-science",
+    "title": "Analyzing Bus Traffic Flows in Singapore",
+    "section": "4.1 Geospatial Data Science",
+    "text": "4.1 Geospatial Data Science\n\nDerive an analytical hexagon data of 375m (this distance is the perpendicular distance between the centre of the hexagon and its edges) to represent the traffic analysis zone (TAZ).\nWith reference to the time intervals provided in the table below, construct an O-D matrix of commuter flows for a time interval of your choice by integrating Passenger Volume by Origin Destination Bus Stops and Bus Stop Location from LTA DataMall. The O-D matrix must be aggregated at the analytics hexagon level\n\n\n\nPeak hour period\nBus tap on time\n\n\n\n\nWeekday morning peak\n6am to 9am\n\n\nWeekday afternoon peak\n5pm to 8pm\n\n\nWeekend/holiday morning peak\n11am to 2pm\n\n\nWeekend/holiday evening peak\n4pm to 7pm\n\n\n\nDisplay the O-D flows of the passenger trips by using appropriate geovisualisation methods (not more than 5 maps).\nDescribe the spatial patterns revealed by the geovisualisation (not more than 100 words per visual).\nAssemble at least three propulsive and three attractiveness variables by using aspatial and geospatial from publicly available sources.\nCompute a distance matrix by using the analytical hexagon data derived earlier."
+  },
+  {
+    "objectID": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Analyzing_Bus_Traffic_Flows.html#spatial-interaction-modelling",
+    "href": "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Analyzing_Bus_Traffic_Flows.html#spatial-interaction-modelling",
+    "title": "Analyzing Bus Traffic Flows in Singapore",
+    "section": "4.2 Spatial Interaction Modelling",
+    "text": "4.2 Spatial Interaction Modelling\n\nCalibrate spatial interactive models to determine factors affecting urban commuting flows at the selected time interval.\nPresent the modelling results by using appropriate geovisualisation and graphical visualisation methods. (Not more than 5 visuals)\nWith reference to the Spatial Interaction Model output tables, maps and data visualisation prepared, describe the modelling results. (not more than 100 words per visual)."
+  },
+  {
+    "objectID": "index.html#rstudio",
+    "href": "index.html#rstudio",
+    "title": "Wei Peng’s Analytics Journey",
+    "section": "RStudio",
+    "text": "RStudio\n\n\n\n\n\n\n\n\nAnalyzing Bus Traffic Flows in Singapore\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCreating Better Visualisations\n\n\n\n\n\n\nTen Wei Peng\n\n\nMay 2, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]

@@ -1,0 +1,33 @@
+---
+title: "Wei Peng's Analytics Journey"
+page-layout: full
+listing:
+  - id: RStudio
+    contents:
+      - Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/*.qmd
+      - Visual_Analytics/Creating_Better_Visualisations/*.qmd
+    type: grid
+
+  - id: Tableau
+    type: grid
+    contents: 
+      - url: "https://public.tableau.com/app/profile/wei.peng.ten/viz/in-Class_2/QuaterlyPrivateResidentialPropertyWatcher2023-2024Q1#2"
+        title: "Quarterly Private Residential Property Watcher"
+        description: "Tableau Visualization"
+        thumbnail: images/quarterly_price.png
+
+toc: false
+number-sections: false
+---
+
+Welcome! In this website, I will be sharing my learning journey in analytics.
+
+## RStudio
+
+::: {#RStudio}
+:::
+
+## Tableau
+
+::: {#Tableau}
+:::

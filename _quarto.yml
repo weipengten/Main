@@ -8,20 +8,26 @@ website:
     - text: "Geospatial Analytics"
       menu:
         - text: "Analyzing Bus Traffic Flows in Singapore"
-          href: "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Take-Home_Ex02.qmd"
+          href: "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Analyzing_Bus_Traffic_Flows.qmd"
     - text: "Visual Analytics"
       menu:
         - text: "Creating Better Visualisations"
-          href: "Visual_Analytics/Creating_Better_Visualisations/Take-Home_Ex02.qmd"
+          href: "Visual_Analytics/Creating_Better_Visualisations/Creating_Better_Visualisations.qmd"
     right:
-      - href: Main.qmd
+      - href: index.qmd
         text: Home
+  page-footer:
+    background: light
+    left: 
+      - href: https://quarto.org/
+        text: "Published with Quarto |"
+      - href: https://www.netlify.com/
+        text: "Hosted by Netlify"
 
 
 format:
   html:
     theme: sandstone
-    css: styles.css
     toc: true
     toc-title: "On this page"
     number-sections: true
