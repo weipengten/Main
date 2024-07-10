@@ -5,14 +5,21 @@ website:
   title: "Wei Peng's Analytics Journey"
   navbar:
     left:
-    - text: "Geospatial Analytics"
+    - text: "RStudio"
       menu:
         - text: "Analyzing Bus Traffic Flows in Singapore"
           href: "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Analyzing_Bus_Traffic_Flows.qmd"
-    - text: "Visual Analytics"
-      menu:
+    
         - text: "Creating Better Visualisations"
           href: "Visual_Analytics/Creating_Better_Visualisations/Creating_Better_Visualisations.qmd"
+   
+    - text: "Tableau"
+      menu:
+        - text: "Quarterly Private Residential Property Watcher"
+          href: "Tableau/Quarterly_Private_Residential_Property_Watcher.qmd"
+        
+        - text: "Mapping In Tableau"
+          href: "Tableau/Mapping_In_Tableau.qmd"
     right:
       - href: index.qmd
         text: Home

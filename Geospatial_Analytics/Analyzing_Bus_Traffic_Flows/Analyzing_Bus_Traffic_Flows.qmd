@@ -1,22 +1,14 @@
 ---
 title: "Analyzing Bus Traffic Flows in Singapore"
+description: "Geospatial Analytics"
+author: "Ten Wei Peng"
+date: "July 10, 2024"
 date-modified: "last-modified"
-format: html
 execute: 
-  echo: true
   eval: true
+  echo: true
   warning: false
-  
-highlight-style: github
-code:
-  lineNumbers: true
-  wrapLines: true
-  wrap: true
-  style: "color: black; background-color: #f0f0f0;"
-output:
-  quarto::quarto_html:
-    includes:
-      after_body: styles.css
+  freeze: true
 ---
 
 # **Setting the Scene**

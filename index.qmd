@@ -11,10 +11,8 @@ listing:
   - id: Tableau
     type: grid
     contents: 
-      - url: "https://public.tableau.com/app/profile/wei.peng.ten/viz/in-Class_2/QuaterlyPrivateResidentialPropertyWatcher2023-2024Q1#2"
-        title: "Quarterly Private Residential Property Watcher"
-        description: "Tableau Visualization"
-        thumbnail: images/quarterly_price.png
+      - Tableau/Quarterly_Private_Residential_Property_Watcher.qmd
+      - Tableau/Mapping_In_Tableau.qmd
 
 toc: false
 number-sections: false

@@ -1,0 +1,10 @@
+---
+title: "Quarterly Private Residential Property Watcher"
+description: "Tableau Visualization"
+author: "Ten Wei Peng"
+date: "July 10, 2024"
+date-modified: "last-modified"
+format: html
+---
+
+[![](/images/quarterly_price.PNG)](https://public.tableau.com/app/profile/wei.peng.ten/viz/in-Class_2/QuaterlyPrivateResidentialPropertyWatcher2023-2024Q1){target="_blank"}

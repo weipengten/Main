@@ -10,7 +10,9 @@
     "listing": "/index.html",
     "items": [
       "/Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Analyzing_Bus_Traffic_Flows.html",
-      "/Visual_Analytics/Creating_Better_Visualisations/Creating_Better_Visualisations.html"
+      "/Visual_Analytics/Creating_Better_Visualisations/Creating_Better_Visualisations.html",
+      "/Tableau/Mapping_In_Tableau.html",
+      "/Tableau/Quarterly_Private_Residential_Property_Watcher.html"
     ]
   }
 ]

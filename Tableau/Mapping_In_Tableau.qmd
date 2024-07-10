@@ -1,0 +1,19 @@
+---
+title: "Mapping in Tableau"
+description: "Tableau Visualization"
+author: "Ten Wei Peng"
+date: "July 10, 2024"
+date-modified: "last-modified"
+format: html
+---
+
+
+[![](/images/Mapping.PNG)](https://public.tableau.com/app/profile/wei.peng.ten/viz/maps_17178261831200/Dashboard2){target="_blank"}
+
+::: callout-note
+Tableau utilizes geocoding services to convert geographical data, such as postal codes into latitude and longitude coordinates. This simplifies the process since we do not need to include these coordinates in the dataset. However, it's important to remember that the accuracy of your geodata depends on the latest update of Tableau's geocoding database.
+:::
+
+**Latitude and Longitude for PropSymbol map**: generated via `Postal Code`
+
+**Latitude and Longitude for Treemap**: generated via `Planning Region`

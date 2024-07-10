@@ -1,7 +1,8 @@
 ---
 title: "Creating Better Visualisations"
+description: "Visual Analytics"
 author: "Ten Wei Peng"
-date: "May 02, 2024"
+date: "July 10, 2024"
 date-modified: "last-modified"
 execute: 
   eval: true
