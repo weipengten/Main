@@ -8,10 +8,10 @@ website:
     - text: "RStudio"
       menu:
         - text: "Analyzing Bus Traffic Flows in Singapore"
-          href: "Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Analyzing_Bus_Traffic_Flows.qmd"
+          href: "RStudio/Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/Analyzing_Bus_Traffic_Flows.qmd"
     
         - text: "Creating Better Visualisations"
-          href: "Visual_Analytics/Creating_Better_Visualisations/Creating_Better_Visualisations.qmd"
+          href: "RStudio/Visual_Analytics/Creating_Better_Visualisations/Creating_Better_Visualisations.qmd"
    
     - text: "Tableau"
       menu:
@@ -20,6 +20,15 @@ website:
         
         - text: "Mapping In Tableau"
           href: "Tableau/Mapping_In_Tableau.qmd"
+          
+        - text: "Bullet Graph and Sparkline"
+          href: "Tableau/Bullet_Graph_and_Sparkline.qmd"
+
+    - text: "Python"
+      menu:
+        - text: "Image Learning on CIFAR-10"
+          href: "Python/ImageLearningCifar10.qmd"
+        
     right:
       - href: index.qmd
         text: Home
@@ -37,7 +46,6 @@ format:
     theme: sandstone
     toc: true
     toc-title: "On this page"
-    number-sections: true
     toc-expand: 3
     toc-depth: 3
     

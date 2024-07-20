@@ -4,8 +4,8 @@ page-layout: full
 listing:
   - id: RStudio
     contents:
-      - Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/*.qmd
-      - Visual_Analytics/Creating_Better_Visualisations/*.qmd
+      - RStudio/Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/*.qmd
+      - RStudio/Visual_Analytics/Creating_Better_Visualisations/*.qmd
     type: grid
 
   - id: Tableau
@@ -13,7 +13,13 @@ listing:
     contents: 
       - Tableau/Quarterly_Private_Residential_Property_Watcher.qmd
       - Tableau/Mapping_In_Tableau.qmd
-
+      - Tableau/Bullet_Graph_and_Sparkline.qmd
+      
+  - id: Python
+    type: grid
+    contents: 
+      - Python/ImageLearningCifar10.qmd
+      
 toc: false
 number-sections: false
 ---
@@ -28,4 +34,9 @@ Welcome! In this website, I will be sharing my learning journey in analytics.
 ## Tableau
 
 ::: {#Tableau}
+:::
+
+## Python
+
+::: {#Python}
 :::

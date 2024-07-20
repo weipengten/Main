@@ -1,0 +1,14 @@
+---
+title: "Bullet Graph and Sparkline"
+description: "Tableau Visualization"
+author: "Ten Wei Peng"
+date: "July 10, 2024"
+date-modified: "last-modified"
+format: html
+---
+
+[![](/images/BulletandSpark.PNG)](https://public.tableau.com/app/profile/wei.peng.ten/viz/BulletGraphandSparkline/Dashboard1)
+
+::: callout-note
+Bullet Graph and Sparklines are perfect to include in dashboards where space is limited but performance metrics need to be displayed clearly.
+:::
