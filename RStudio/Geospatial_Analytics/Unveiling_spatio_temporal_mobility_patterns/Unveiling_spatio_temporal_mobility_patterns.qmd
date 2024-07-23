@@ -9,7 +9,7 @@ format: html
 
 `Changelog:`
 
-`\[1.0.0\] - 2024-07-22 - Utilized more appropraite and contrasting colors for nodes.`
+`\[1.0.0\] - 2024-07-23 - Initial build`
 
 
 ## Overview
@@ -1181,8 +1181,9 @@ tm_shape(lisa_sig) +
 
 
 
-
 ```{r}
+#| eval: FALSE
+#| echo: FALSE
 # Load required packages
 
 library(viridis)

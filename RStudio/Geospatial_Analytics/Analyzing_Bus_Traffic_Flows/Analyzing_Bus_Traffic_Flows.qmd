@@ -2171,6 +2171,7 @@ Similar to the Origin-Constrained model, this chunk calculates the R-squared val
 
 Function CalcRSquared to calculate the R-squared value, a measure of how well the model fits the data. This function takes observed and estimated values as inputs.
 ```{r}
+#| eval: FALSE
 CalcRSquared <- function(observed,estimated){
   r <- cor(observed,estimated)
   R2 <- r^2
@@ -2182,6 +2183,7 @@ CalcRSquared(uncSIM_Poisson$data$TRIPS, uncSIM_Poisson$fitted.values)
 RMSE is calculated by taking the square root of the mean of the squared residuals. It provides a measure of the average magnitude of the residuals, giving you an idea of how well the model performs. The RMSE derived here 805.7545 is actually quite small, unfortunately we are unable to compare with other models due to some issues..
 
 ```{r}
+#| eval: FALSE
 residuals <- uncSIM_Poisson$data$TRIPS - uncSIM_Poisson$fitted.values
 
 # Calculate RMSE
