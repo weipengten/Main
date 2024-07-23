@@ -1,5 +1,6 @@
 ---
 title: "Unveiling the spatial and spatio-temporal mobility patterns of public bus passengers in Singapore"
+description: "Geospatial Analytics"
 author: "Ten Wei Peng"
 date: "July 22, 2024"
 date-modified: "last-modified"
