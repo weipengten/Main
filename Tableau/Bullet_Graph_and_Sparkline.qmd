@@ -9,6 +9,6 @@ format: html
 
 [![](/images/BulletandSpark.PNG)](https://public.tableau.com/app/profile/wei.peng.ten/viz/BulletGraphandSparkline/Dashboard1)
 
-::: callout-note
+::: {.notebox .lightbulb data-latex="lightbulb"}
 Bullet Graph and Sparklines are perfect to include in dashboards where space is limited but performance metrics need to be displayed clearly.
 :::

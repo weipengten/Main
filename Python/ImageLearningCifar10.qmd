@@ -80,7 +80,7 @@ print("Test set shape:", x_test.shape)
 
 ![](images/clipboard-929340846.png)
 
-::: callout-note
+::: {.notebox .lightbulb data-latex="lightbulb"}
 -   The x_train.shape returns **(50000, 32, 32, 3)**, indicating that there are 50,000 training images, each of size 32x32 pixels with 3 color channels (RGB).
 
 -   The x_test.shape returns **(10000, 32, 32, 3)**, indicating that there are 10,000 test images, each of size 32x32 pixels with 3 color channels (RGB).
@@ -114,7 +114,7 @@ print("Test set shape:", x_test.shape)
 
 ![](images/clipboard-149929291.png)
 
-::: callout-note
+::: {.notebox .lightbulb data-latex="lightbulb"}
 By reshaping the images into **(50000, 3072)** and **(10000, 3072)**, each image is now represented as a 1-dimensional array (vector) of length 3072. This reshaping is commonly done to prepare the data for certain machine learning algorithms that expect input as 1-dimensional arrays rather than 3-dimensional images.
 :::
 
@@ -273,7 +273,7 @@ train_set = transform_train.flow(x_train[:40000], y_train[:40000], batch_size=32
 validation_set = validation_train.flow(x_train[40000:], y_train[40000:], batch_size=32)
 ```
 
-::: callout-note
+::: {.notebox .lightbulb data-latex="lightbulb"}
 **Why do we need additional preprocessing steps for CNN?**
 
 Convolutional Neural Networks (CNNs) are specifically designed to work with image data. To enhance their performance, particularly when working with relatively small datasets like CIFAR-10, additional preprocessing steps are often employed. These steps help improve the model's ability to generalize to unseen data and mitigate overfitting.
@@ -431,7 +431,7 @@ print('Test acc:', acc)
 
 ![](images/clipboard-239623973.png)
 
-::: callout-note
+::: {.notebox .lightbulb data-latex="lightbulb"}
 **We achieved a high test score of 0.898, but the question remains: is this the best way to use transfer learning?**
 
 To determine if our approach to transfer learning is correct, we first need to understand the principles behind it. Transfer learning is designed to enhance efficiency and reduce computational costs by leveraging pretrained models. Instead of retraining a model from scratch, we use an existing model that has already been trained on a large dataset. This typically involves "freezing" the earlier layers of the model, which means keeping their weights unchanged, and only training the final layers on our specific dataset. This strategy allows us to build on the learned features of the pretrained model, thus saving time and computational resources while potentially achieving better performance with less data.
@@ -441,7 +441,7 @@ In the case above, we had set `pretrained_model.trainable = True` which we shoul
 
 **A Better way to utilise a pretrained model:** Firstly, instead of incorporating a resizing layer within the model, we should resize our images to 224x224 pixels during the preprocessing step.
 
-::: callout-note
+::: {.notebox .lightbulb data-latex="lightbulb"}
 **Can you think of the rationale for this?**
 :::
 

@@ -105,6 +105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body class="nav-fixed">
@@ -178,6 +179,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/weipengten"> <i class="bi bi-linkedin" role="img" aria-label="Linkedin">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/weipengten"> <i class="bi bi-github" role="img" aria-label="Github">
+</i> 
+<span class="menu-text"></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -265,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="importing-libraries" class="level2">
 <h2 class="anchored" data-anchor-id="importing-libraries">Importing Libraries</h2>
-<div id="18d03693" class="cell" data-execution_count="1">
+<div id="c453cf85" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Importing necessary libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -297,7 +308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="exploring-the-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="exploring-the-dataset">Exploring the dataset</h2>
 <p>This Python code snippet uses TensorFlow’s Keras API to load the CIFAR-10 dataset and print the shapes of the training and test sets. The CIFAR-10 dataset is a popular dataset used for training machine learning and computer vision algorithms. It consists of 60,000 32x32 color images in 10 different classes, with 6,000 images per class.</p>
-<div id="9745cb7d" class="cell" data-execution_count="2">
+<div id="36afae91" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the CIFAR-10 dataset</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>cifar10 <span class="op">=</span> tf.keras.datasets.cifar10</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>(x_train, y_train), (x_test, y_test) <span class="op">=</span> cifar10.load_data()</span>
@@ -306,24 +317,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Test set shape:"</span>, x_test.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="images/clipboard-929340846.png" class="img-fluid"></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="notebox lightbulb">
 <ul>
 <li><p>The x_train.shape returns <strong>(50000, 32, 32, 3)</strong>, indicating that there are 50,000 training images, each of size 32x32 pixels with 3 color channels (RGB).</p></li>
 <li><p>The x_test.shape returns <strong>(10000, 32, 32, 3)</strong>, indicating that there are 10,000 test images, each of size 32x32 pixels with 3 color channels (RGB).</p></li>
 </ul>
 </div>
-</div>
 <p><strong>This code will display the first 10 images from the CIFAR-10 training set with their respective classes.</strong></p>
-<div id="b3d381e7" class="cell" data-execution_count="3">
+<div id="f53d73c8" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>images <span class="op">=</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">10</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>classes <span class="op">=</span> <span class="bu">list</span>(np.unique(y_train))</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>,<span class="dv">10</span>))</span>
@@ -333,7 +334,7 @@ Note
 </div>
 <p><img src="images/clipboard-1174994514.png" class="img-fluid"></p>
 <p><strong>Next, let’s reshape the arrays to have only 2 dimensions</strong></p>
-<div id="8ec755b3" class="cell" data-execution_count="4">
+<div id="a3719b72" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>x_train <span class="op">=</span> x_train.reshape(<span class="dv">50000</span>, <span class="dv">32</span> <span class="op">*</span> <span class="dv">32</span> <span class="op">*</span> <span class="dv">3</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>x_test  <span class="op">=</span> x_test.reshape (<span class="dv">10000</span>, <span class="dv">32</span> <span class="op">*</span> <span class="dv">32</span> <span class="op">*</span> <span class="dv">3</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -341,23 +342,13 @@ Note
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Test set shape:"</span>, x_test.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="images/clipboard-149929291.png" class="img-fluid"></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="notebox lightbulb">
 <p>By reshaping the images into <strong>(50000, 3072)</strong> and <strong>(10000, 3072)</strong>, each image is now represented as a 1-dimensional array (vector) of length 3072. This reshaping is commonly done to prepare the data for certain machine learning algorithms that expect input as 1-dimensional arrays rather than 3-dimensional images.</p>
-</div>
 </div>
 <p><strong>Next we perform the necessary pre-processing steps:</strong></p>
 <p><strong>Splitting the Training Dataset:</strong> The training dataset is split into a new training set and a validation set using an 80/20 split to evaluate the model during training. The train_test_split function is used with test_size=0.2 and random_state=42 for reproducibility.</p>
 <p><strong>Data Type Conversion:</strong> The feature arrays are converted to float32 data type to ensure compatibility with TensorFlow</p>
-<div id="65664014" class="cell" data-execution_count="5">
+<div id="b4d52ebf" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Splitting "training" dataset further into train,validation datasets</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>x_train, x_valid, y_train, y_valid <span class="op">=</span> train_test_split(x_train, y_train, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -366,7 +357,7 @@ Note
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>x_test <span class="op">=</span> x_test.astype(<span class="st">'float32'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Min-Max Scaling:</strong> . A Min-Max scaling function normalizes the pixel values of the images to the range [0, 1], which helps in faster and more stable training of the model.</p>
-<div id="51f495b1" class="cell" data-execution_count="6">
+<div id="d914bb73" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">## Transform method: MinMax - is preferred when working with TensorFlow</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> min_max_scaler(x_train, x_valid, x_test):</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  x_train_ms<span class="op">=</span> x_train<span class="op">/</span><span class="dv">255</span></span>
@@ -377,7 +368,7 @@ Note
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>x_train_ms, x_valid_ms, x_test_ms <span class="op">=</span> min_max_scaler(x_train, x_valid, x_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>One-Hot Encoding the Labels:</strong> The class labels are converted to one-hot encoded vectors using to_categorical, which transforms the integer labels into binary vectors. This format is required for categorical classification tasks where the neural network’s output layer expects binary vectors.</p>
-<div id="4e06c52b" class="cell" data-execution_count="7">
+<div id="e89b4e33" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># By converting the target variables to one-hot format, we can ensure that they are compatible with the output layer of the MLP model, which expects the target variables to be represented as a vector of binary values.</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>y_train_1hot <span class="op">=</span> to_categorical(y_train, <span class="dv">10</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>y_valid_1hot <span class="op">=</span> to_categorical(y_valid, <span class="dv">10</span>)</span>
@@ -393,7 +384,7 @@ Note
 <li><p><strong>Hidden Layers</strong>: 1 with 256 neurons</p></li>
 <li><p><strong>Activation Layer</strong>: (ReLU, softmax)</p></li>
 </ul>
-<div id="8f0a8894" class="cell" data-execution_count="8">
+<div id="270831b9" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the model architecture</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> keras.Sequential([</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Input Layer</span></span>
@@ -451,7 +442,7 @@ Note
 <h2 class="anchored" data-anchor-id="implementing-a-convolutional-neural-network-cnn-for-cifar-10-classification">2. Implementing a Convolutional Neural Network (CNN) for CIFAR-10 Classification</h2>
 <p><strong>Preprocessing</strong></p>
 <p>First off, let’s reproduce some of the preprocessing steps we did earlier:</p>
-<div id="de89d0d3" class="cell" data-execution_count="9">
+<div id="bb1c6f7c" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load Data and Split into Train, Test dataset</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>(x_train, y_train), (x_test, y_test) <span class="op">=</span> cifar10.load_data()</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -469,7 +460,7 @@ Note
 </div>
 <p><strong>Data Augmentation, Manual Splitting and Batch Processing</strong></p>
 <p>Next, this set of additional steps are required for preprocessing for CNN</p>
-<div id="029b19a7" class="cell" data-execution_count="10">
+<div id="eeaf4f9f" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data Augmentation</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>transform_train <span class="op">=</span> ImageDataGenerator(</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        width_shift_range<span class="op">=</span><span class="fl">0.1</span>,  <span class="co"># randomly shift images horizontally (fraction of total width)</span></span>
@@ -484,23 +475,13 @@ Note
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>train_set <span class="op">=</span> transform_train.flow(x_train[:<span class="dv">40000</span>], y_train[:<span class="dv">40000</span>], batch_size<span class="op">=</span><span class="dv">32</span>)</span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>validation_set <span class="op">=</span> validation_train.flow(x_train[<span class="dv">40000</span>:], y_train[<span class="dv">40000</span>:], batch_size<span class="op">=</span><span class="dv">32</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="notebox lightbulb">
 <p><strong>Why do we need additional preprocessing steps for CNN?</strong></p>
 <p>Convolutional Neural Networks (CNNs) are specifically designed to work with image data. To enhance their performance, particularly when working with relatively small datasets like CIFAR-10, additional preprocessing steps are often employed. These steps help improve the model’s ability to generalize to unseen data and mitigate overfitting.</p>
 <ul>
 <li><p><strong>Data Augmentation:</strong> Increases the diversity of the training dataset by applying random transformations such as shifts, rotations, and flips. This helps the CNN model generalize better by training on a wider variety of image presentations. This is different from MLP earlier as MLPs typically work with flattened input data and do not benefit as much from spatial data augmentation</p></li>
 <li><p><strong>Manual Splitting and Batch Processing:</strong> The <code>ImageDataGenerator</code> in TensorFlow/Keras handles data augmentation and requires the data to be in a specific format (i.e., batches). Hence, the split is done manually to apply augmentation on the training set while keeping the validation set unchanged. CNNs typically require batch processing for efficient training. The flow method from <code>ImageDataGenerator</code>creates an iterator that generates batches of augmented data on-the-fly. This is especially useful when working with large datasets or when applying data augmentation. Manual splitting allows for better control over how data is augmented and fed into the model. By explicitly defining the training and validation datasets, we ensure that augmentation is applied only to the training data, not the validation data.</p></li>
 </ul>
-</div>
 </div>
 <section id="building-a-convolutional-neural-network-for-cifar-10" class="level3">
 <h3 class="anchored" data-anchor-id="building-a-convolutional-neural-network-for-cifar-10">Building a Convolutional Neural Network for CIFAR-10!</h3>
@@ -536,7 +517,7 @@ Note
 </section>
 <section id="dropout-is-a-regularization-technique-that-helps-prevent-overfitting-by-randomly-setting-some-of-the-neurons-to-zero-during-training.-by-using-a-high-dropout-rate-0.25-and-0.5-it-is-likely-to-reduce-overfitting-and-contribute-to-better-performance." class="level5">
 <h5 class="anchored" data-anchor-id="dropout-is-a-regularization-technique-that-helps-prevent-overfitting-by-randomly-setting-some-of-the-neurons-to-zero-during-training.-by-using-a-high-dropout-rate-0.25-and-0.5-it-is-likely-to-reduce-overfitting-and-contribute-to-better-performance."><code>Dropout</code> is a regularization technique that helps prevent overfitting by randomly setting some of the neurons to zero during training. By using a high dropout rate (0.25) and (0.5), it is likely to reduce overfitting and contribute to better performance.</h5>
-<div id="a1bd167c" class="cell" data-execution_count="11">
+<div id="b3a99509" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">## CNN Archeticure</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> CNN():</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -597,7 +578,7 @@ Note
 <li><p><strong>Early Stopping</strong> is employed to enhance training efficiency by halting the training process when the model’s performance ceases to improve on the validation dataset. This prevents unnecessary computations and helps avoid overfitting.</p></li>
 <li><p><strong>ModelCheckpoint callback</strong> is used to save the model’s weights at specific points during training, ensuring that the best-performing model (according to validation metrics) is preserved. This way, if the training process is interrupted or if we need to revert to a previous state, we can load the saved weights and continue from the best checkpoint. Together, these techniques help optimize both the training time and the final performance of the model.</p></li>
 </ul>
-<div id="3f56d521" class="cell" data-execution_count="12">
+<div id="3bb43d14" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pretrained_model <span class="op">=</span> ResNet50(input_shape<span class="op">=</span>(<span class="dv">224</span>, <span class="dv">224</span>, <span class="dv">3</span>),</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                    include_top<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -642,34 +623,14 @@ Note
 </div>
 <p><img src="images/clipboard-3999430006.png" class="img-fluid"></p>
 <p><img src="images/clipboard-239623973.png" class="img-fluid"></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="notebox lightbulb">
 <p><strong>We achieved a high test score of 0.898, but the question remains: is this the best way to use transfer learning?</strong></p>
 <p>To determine if our approach to transfer learning is correct, we first need to understand the principles behind it. Transfer learning is designed to enhance efficiency and reduce computational costs by leveraging pretrained models. Instead of retraining a model from scratch, we use an existing model that has already been trained on a large dataset. This typically involves “freezing” the earlier layers of the model, which means keeping their weights unchanged, and only training the final layers on our specific dataset. This strategy allows us to build on the learned features of the pretrained model, thus saving time and computational resources while potentially achieving better performance with less data.</p>
 <p>In the case above, we had set <code>pretrained_model.trainable = True</code> which we should have set to <code>False</code> to fully leverage the full benefits of a pretrained model.</p>
 </div>
-</div>
 <p><strong>A Better way to utilise a pretrained model:</strong> Firstly, instead of incorporating a resizing layer within the model, we should resize our images to 224x224 pixels during the preprocessing step.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="notebox lightbulb">
 <p><strong>Can you think of the rationale for this?</strong></p>
-</div>
 </div>
 <section id="to-be-continued.." class="level3">
 <h3 class="anchored" data-anchor-id="to-be-continued..">To be Continued…..</h3>

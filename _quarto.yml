@@ -35,6 +35,12 @@ website:
     right:
       - href: index.qmd
         text: Home
+      - icon: linkedin
+        href: https://www.linkedin.com/in/weipengten
+        aria-label: Linkedin
+      - icon: github
+        href: https://github.com/weipengten
+        aria-label: Github
   page-footer:
     background: light
     left: 
@@ -51,6 +57,7 @@ format:
     toc-title: "On this page"
     toc-expand: 3
     toc-depth: 3
+    css: style.css
     
 editor: visual
 

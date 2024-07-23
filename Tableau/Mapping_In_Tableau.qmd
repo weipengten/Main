@@ -7,9 +7,9 @@ date-modified: "last-modified"
 format: html
 ---
 
-[![](/images/Mapping.PNG)](https://public.tableau.com/app/profile/wei.peng.ten/viz/maps_17178261831200/Dashboard2){target="_blank"}
+[![](/images/Mapping.PNG)](https://public.tableau.com/app/profile/wei.peng.ten/viz/maps_17178261831200/Dashboard2)
 
-::: callout-note
+::: {.notebox .lightbulb data-latex="lightbulb"}
 Tableau utilizes geocoding services to convert geographical data, such as postal codes into latitude and longitude coordinates. This simplifies the process since we do not need to include these coordinates in the dataset. However, it's important to remember that the accuracy of your geodata depends on the latest update of Tableau's geocoding database.
 :::
 

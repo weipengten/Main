@@ -1,1 +1,16 @@
 /* css styles */
+
+
+/* Custom callout boxes */
+.notebox {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  border: 1.5px solid #000000;
+  border-radius: 10px;
+  font-size: 16px;
+  background: #87CEEB 5px center/3em no-repeat;
+}
+
+.lightbulb {
+  background-image: url("images/lightbulb.png");
+}
