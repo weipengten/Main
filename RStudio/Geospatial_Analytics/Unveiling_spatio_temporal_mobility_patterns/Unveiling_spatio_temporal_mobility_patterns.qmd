@@ -6,11 +6,9 @@ date-modified: "last-modified"
 format: html
 ---
 
-
 `Changelog:`
 
 `\[1.0.0\] - 2024-07-23 - Initial build`
-
 
 ## Overview
 
@@ -1179,8 +1177,6 @@ tm_shape(lisa_sig) +
 ```
 :::
 
-
-
 ```{r}
 #| eval: FALSE
 #| echo: FALSE
@@ -1258,7 +1254,3 @@ leaflet_map <- combined_map %>%
 # Print the leaflet map
 leaflet_map
 ```
-
-
-
-

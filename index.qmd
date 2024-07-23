@@ -4,7 +4,7 @@ page-layout: full
 listing:
   - id: RStudio
     contents:
-      - RStudio/Geospatial_Analytics/Unveiling_spatio_temporal_mobility_patterns*.qmd
+      - RStudio/Geospatial_Analytics/Unveiling_spatio_temporal_mobility_patterns/*.qmd
       - RStudio/Geospatial_Analytics/Analyzing_Bus_Traffic_Flows/*.qmd
       - RStudio/Visual_Analytics/Creating_Better_Visualisations/*.qmd
     type: grid
