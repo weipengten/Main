@@ -6,6 +6,14 @@ date: "July 10, 2024"
 date-modified: "last-modified"
 ---
 
+
+`Changelog:`
+
+`\[1.0.0\] - 2024-07-10 - Initial deployment.`
+`\[1.0.1\] - 2024-07-22 - Removal of Origin-Constrained and Doubly COnstrained Models.`
+
+
+
 ![](/images/Morning_peak.PNG)
 
 # **Setting the Scene**
@@ -2104,46 +2112,6 @@ flow_data_tidy_SIM <- read_rds("data/rds/flow_data_tidy.rds")
 ```
 
 ::: panel-tabset
-## Origin-Constrained Spatial Interaction Model
-
-This chunk fits a Poisson regression model **glm** representing an Origin-Constrained Spatial Interaction Model. The formula includes various factors such as the origin grid, log-transformed counts of schools, businesses, distance to CBD, etc. The model is used to estimate the expected number of trips **TRIPS**. The summary provides coefficients and statistical information about the model.
-
-```{r}
-# orcSIM_Poisson<- glm(formula = TRIPS ~
-#                         ORIGIN_GRID +
-#                         log(SCHOOL_COUNT) +
-#                         log(Business_COUNT) +
-#                         log(DISTANCE_TO_CBD) +
-#                         log(MIN_DISTANCE_TO_MRTLINE) +
-#                         log(MIN_DISTANCE_TO_ITH) +
-#                         log(MIN_DISTANCE_TO_PARK) +
-#                         log(FnB_COUNT)+
-#                         log(Entertn_COUNT) +
-#                         log(Leisure_COUNT) +
-#                         log(DIST),
-#                       family = poisson(link = "log"),
-#                       data = flow_data_tidy_SIM,
-#                       na.action = na.exclude)
-# summary(orcSIM_Poisson)
-```
-
-Function **CalcRSquared** to calculate the R-squared value, a measure of how well the model fits the data. This function takes observed and estimated values as inputs.
-
-```{r}
-CalcRSquared <- function(observed,estimated){
-  r <- cor(observed,estimated)
-  R2 <- r^2
-  R2
-}
-```
-
-Here, the previously defined R-squared function is applied to calculate the R-squared value for the Origin-Constrained model. The R-squared value helps assess the goodness of fit of the model to the observed data.
-
-```{r}
-#| eval: false
-CalcRSquared(orcSIM_Poisson$data$TRIPS, orcSIM_Poisson$fitted.values)
-```
-
 ## Unconstrained Spatial Interaction Model
 
 This chunk fits a Poisson regression model representing an Unconstrained Spatial Interaction Model. The formula includes various log-transformed variables. The summary provides coefficients and statistical information about the model.
@@ -2200,55 +2168,15 @@ The significance codes suggest that all coefficients are highly significant (p-v
 
 Similar to the Origin-Constrained model, this chunk calculates the R-squared value for the Unconstrained Spatial Interaction Model, providing an indication of how well the model fits the data. Apparently, it doesn't seem to be doing very well, with only a R-square value of 0.05594632.
 
+
+Function CalcRSquared to calculate the R-squared value, a measure of how well the model fits the data. This function takes observed and estimated values as inputs.
 ```{r}
+CalcRSquared <- function(observed,estimated){
+  r <- cor(observed,estimated)
+  R2 <- r^2
+  R2
+}
 CalcRSquared(uncSIM_Poisson$data$TRIPS, uncSIM_Poisson$fitted.values)
-```
-
-## Doubly Constrained Spatial Interaction Model
-
-The code for the Doubly Constrained Spatial Interaction Model is commented out and not being used at the moment. The Doubly Constrained model considers constraints on both origins and destinations.
-
-```{r}
-# dbcSIM_Poisson <- glm(formula = TRIPS ~
-#                         ORIGIN_GRID +
-#                         DESTIN_GRID +
-#                         log(SCHOOL_COUNT) +
-#                         log(Business_COUNT) +
-#                         log(UNITS) +
-#                         log(MIN_DISTANCE_TO_SCHOOL) +
-#                         log(DISTANCE_TO_CBD) +
-#                         log(MIN_DISTANCE_TO_MRTLINE) +
-#                         log(MIN_DISTANCE_TO_ITH) +
-#                         log(MIN_DISTANCE_TO_PARK) +
-#                         log(FnB_COUNT)+
-#                         log(Entertn_COUNT) +
-#                         log(Leisure_COUNT) +
-#                         log(DIST),
-#                       family = poisson(link = "log"),
-#                       data = flow_data_tidy_SIM,
-#                       na.action = na.exclude)
-# summary(dbcSIM_Poisson)
-```
-
-Similar to the previous R-squared calculations, this chunk would calculate the R-squared value for the Doubly Constrained Spatial Interaction Model if the model were active.
-
-```{r}
-#| eval: false
-CalcRSquared(dbcSIM_Poisson$data$TRIPS, dbcSIM_Poisson$fitted.values)
-```
-
-## Model comparison
-
-Another useful model performance measure for continuous dependent variable is Root Mean Squared Error. First of all, let us create a list called model_list by using the code chunk below. Next, we will compute the RMSE of all the models in model_list file by using the code chunk below.
-
-```{r}
-#| eval: false
-model_list <- list(unconstrained=uncSIM_Poisson,
-                   originConstrained=orcSIM_Poisson,
-                   doublyConstrained=dbcSIM_Poisson)
-
-compare_performance(model_list,
-                    metrics = "RMSE")
 ```
 
 RMSE is calculated by taking the square root of the mean of the squared residuals. It provides a measure of the average magnitude of the residuals, giving you an idea of how well the model performs. The RMSE derived here 805.7545 is actually quite small, unfortunately we are unable to compare with other models due to some issues..
@@ -2288,52 +2216,5 @@ ggplot(data = flow_data_tidy_SIM,
   geom_smooth(method = lm)
 ```
 
-We can do a visualisation for all if they were actually working in the code chunk below
 
-```{r}
-# df <- as.data.frame(uncSIM_Poisson$fitted.values) %>%
-#   round(digits = 0)
-# df <- as.data.frame(orcSIM_Poisson$fitted.values) %>%
-#   round(digits = 0)
-# df <- as.data.frame(decSIM_Poisson$fitted.values) %>%
-#   round(digits = 0)
-# df <- as.data.frame(dbcSIM_Poisson$fitted.values) %>%
-#   round(digits = 0)
-# 
-# SIM_data <- SIM_data %>%
-#   cbind(df) %>%
-#   rename(orcTRIPS = "uncSIM_Poisson$fitted.values") %>%
-#   rename(uncTRIPS = "orcSIM_Poisson$fitted.values") %>%
-#   rename(uncTRIPS = "decSIM_Poisson$fitted.values") %>%
-#   rename(uncTRIPS = "dbcSIM_Poisson$fitted.values")
-# 
-# 
-# unc_p <- ggplot(data = SIM_data,
-#                 aes(x = uncTRIPS,
-#                     y = TRIPS)) +
-#   geom_point() +
-#   geom_smooth(method = lm)
-# 
-# orc_p <- ggplot(data = SIM_data,
-#                 aes(x = orcTRIPS,
-#                     y = TRIPS)) +
-#   geom_point() +
-#   geom_smooth(method = lm)
-# 
-# dec_p <- ggplot(data = SIM_data,
-#                 aes(x = decTRIPS,
-#                     y = TRIPS)) +
-#   geom_point() +
-#   geom_smooth(method = lm)
-# 
-# dbc_p <- ggplot(data = SIM_data,
-#                 aes(x = dbcTRIPS,
-#                     y = TRIPS)) +
-#   geom_point() +
-#   geom_smooth(method = lm)
-# 
-# ggarrange(unc_p, orc_p, dec_p, dbc_p,
-#           ncol = 2,
-#           nrow = 2)
-```
 :::
