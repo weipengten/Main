@@ -57,7 +57,7 @@ format:
     toc-title: "On this page"
     toc-expand: 3
     toc-depth: 3
-    css: style.css
+    css: styles.css
     
 editor: visual
 
