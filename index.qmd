@@ -20,6 +20,7 @@ listing:
     type: grid
     contents: 
       - Python/ImageLearningCifar10.qmd
+      - Python/AutoML_Binary_Classification.qmd
       
 toc: false
 number-sections: false

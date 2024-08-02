@@ -31,6 +31,9 @@ website:
       menu:
         - text: "Image Learning on CIFAR-10"
           href: "Python/ImageLearningCifar10.qmd"
+          
+        - text: "AutoML for Binary Classification"
+          href: "Python/AutoML_Binary_Classification.qmd"
         
     right:
       - href: index.qmd
