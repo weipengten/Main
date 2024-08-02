@@ -21,7 +21,7 @@ I was intrigued that such a thing was possible and couldn't wait to try it, here
 
 `Changelog:`
 
-`\[1.0.0\] - 2024-08-02 - Initial deployment after consolidating course work and initial refinement. Looking to tune model to avoid false negatives, for the case of cancer diagnostics.`In the context of cancer diagnostics, **false negatives are generally more critical to avoid** because the consequences of missing a cancer diagnosis (delayed treatment, progression of the disease, reduced survival rates) are often more severe than the consequences of false positives (psychological impact, additional testing, unnecessary treatment). Therefore, cancer screening programs typically prioritize sensitivity to ensure that as few cases as possible are missed, even at the expense of higher false positive rates.
+`\[1.0.0\] - 2024-08-02 - Initial deployment after consolidating course work and initial refinement.`
 
 ## Importing Libraries
 
@@ -1191,6 +1191,361 @@ Recall: 0.9561266060795989
 
 F1 Score: 0.9730480946301695
 
-[**Future Work**]{.underline}
+### 6. Tuning Model to industry and domain knowledge: avoiding false negatives
+In cancer diagnostics, **avoiding false negatives is particularly crucial**. Missing a cancer diagnosis can lead to delayed treatment, disease progression, and reduced survival rates, which are far more serious than the consequences of false positives, such as psychological distress, additional testing, or unnecessary treatment. Consequently, cancer screening programs tend to prioritize sensitivity to minimize the number of missed cases, even if it results in a higher rate of false positives.
 
-I'm intending to make some changes to choose model based on having least number of false negatives.
+In this context, we fit and test the models similarly to the previous approach, but we specifically evaluate and **select the best model based on its ability to maintain a low false negative rate**.
+
+```{python include=FALSE, eval=FALSE, code-fold=true, code-summary="Show the code"}
+class BaseModel:
+    def __init__(self, cleaned_df, target_column, balance='imbalanced', n_splits=5, n_repeats=3, random_state=123):
+        self.df = cleaned_df
+        self.target_column = target_column
+        self.balance = balance
+        self.n_splits = n_splits
+        self.n_repeats = n_repeats
+        self.random_state = random_state
+
+        # Prepare features and target variable
+        self.X = self.df.drop(columns=[self.target_column])
+        self.y = self.df[self.target_column]
+
+        # Label encode the target variable
+        label_encoder = LabelEncoder()
+        self.y = label_encoder.fit_transform(self.y)
+
+        # Split the data into training and test sets
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
+            self.X, self.y, test_size=0.3, random_state=self.random_state
+        )
+
+        # Initialize SMOTEENN if balance is set to 'imbalanced'
+        if self.balance == 'imbalanced':
+            self.smoteenn = SMOTEENN(sampling_strategy='auto', random_state=self.random_state)
+        else:
+            self.smoteenn = None
+
+    def apply_smoteenn(self):
+        if self.smoteenn:
+            return self.smoteenn.fit_resample(self.X_train, self.y_train)
+        else:
+            return self.X_train, self.y_train
+
+    def show_matrix(self, matrix, title='Confusion Matrix'):
+        # Plotting the confusion matrix
+        plt.figure(figsize=(6, 5))
+        sns.heatmap(matrix, annot=True, fmt="d", cmap="Blues", xticklabels=True, yticklabels=True)
+        plt.title(title)
+        plt.ylabel('Actual Class')
+        plt.xlabel('Predicted Class')
+        plt.show()
+
+    def plot_roc_auc(self, y_true, y_pred, title):
+        fpr, tpr, _ = roc_curve(y_true, y_pred)
+        roc_auc = auc(fpr, tpr)
+        plt.figure()
+        plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (area = %0.2f)' % roc_auc)
+        plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+        plt.xlim([0.0, 1.0])
+        plt.ylim([0.0, 1.05])
+        plt.xlabel('False Positive Rate')
+        plt.ylabel('True Positive Rate')
+        plt.title(title)
+        plt.legend(loc="lower right")
+        plt.show()
+
+class DT(BaseModel):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.clf = DecisionTreeClassifier()
+
+    def run_bayesian_search(self):
+        print("\nRunning Bayesian Search for Decision Tree...")
+        # Define the parameter space
+        search_spaces = {
+            'max_features': Categorical(['sqrt', 'log2']),
+            'ccp_alpha': Real(0.001, 0.1, prior='log-uniform'),
+            'max_depth': Integer(20, 30),
+            'criterion': Categorical(['gini', 'entropy']),
+            'min_samples_split': Integer(2, 4),
+            'min_samples_leaf': Integer(2, 4)
+        }
+
+        # Initialize BayesSearchCV
+        cv = RepeatedStratifiedKFold(n_splits=self.n_splits, n_repeats=self.n_repeats, random_state=self.random_state)
+        bayes_search = BayesSearchCV(estimator=self.clf, search_spaces=search_spaces, cv=cv, n_iter=10, scoring='accuracy', random_state=self.random_state, verbose=1, n_jobs=-1)
+        
+        # Apply SMOTEENN to the training data if balance is 'imbalanced'
+        X_resampled, y_resampled = self.apply_smoteenn()
+
+        # Fit BayesSearchCV with the resampled data
+        t0 = time.time()
+        bayes_result = bayes_search.fit(X_resampled, y_resampled)
+        print(f'\nTime taken = {round(time.time() - t0, 2)} sec')
+
+        # Print best score and parameters
+        print(f'Best score = {round(bayes_result.best_score_, 3)} using params: {bayes_result.best_params_}')
+
+        # Evaluate on test data
+        y_pred = bayes_result.best_estimator_.predict(self.X_test)
+        accuracy = accuracy_score(self.y_test, y_pred)
+        print(f'Test accuracy = {round(accuracy, 3)}')
+
+        return bayes_result, y_pred
+
+class RandomForest(BaseModel):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.clf = RandomForestClassifier()
+
+    def run_bayesian_search(self):
+        print("\nRunning Bayesian Search for Random Forest...")
+        # Define the parameter space
+        search_spaces = {
+            'n_estimators': Integer(80, 150),
+            'max_features': Categorical(['sqrt', 'log2']),
+            'max_depth': Integer(20, 30),
+            'criterion': Categorical(['gini', 'entropy']),
+            'min_samples_split': Integer(2, 4),
+            'min_samples_leaf': Integer(2, 4)
+        }
+
+        # Initialize BayesSearchCV
+        cv = RepeatedStratifiedKFold(n_splits=self.n_splits, n_repeats=self.n_repeats, random_state=self.random_state)
+        bayes_search = BayesSearchCV(estimator=self.clf, search_spaces=search_spaces, cv=cv, n_iter=10, scoring='accuracy', random_state=self.random_state, verbose=1, n_jobs=-1)
+        
+        # Apply SMOTEENN to the training data if balance is 'imbalanced'
+        X_resampled, y_resampled = self.apply_smoteenn()
+
+        # Fit BayesSearchCV with the resampled data
+        t0 = time.time()
+        bayes_result = bayes_search.fit(X_resampled, y_resampled)
+        print(f'\nTime taken = {round(time.time() - t0, 2)} sec')
+
+        # Print best score and parameters
+        print(f'Best score = {round(bayes_result.best_score_, 3)} using params: {bayes_result.best_params_}')
+
+        # Evaluate on test data
+        y_pred = bayes_result.best_estimator_.predict(self.X_test)
+        accuracy = accuracy_score(self.y_test, y_pred)
+        print(f'Test accuracy = {round(accuracy, 3)}')
+
+        return bayes_result, y_pred
+
+class XGBoost(BaseModel):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.clf = xgb.XGBClassifier(use_label_encoder=False, eval_metric='logloss')
+
+    def run_bayesian_search(self):
+        print("\nRunning Bayesian Search for XGBoost...")
+        # Define the parameter space
+        search_spaces = {
+            'n_estimators': Integer(80, 150),
+            'max_depth': Integer(20, 30),
+            'learning_rate': Real(0.01, 0.2, prior='log-uniform'),
+            'subsample': Real(0.5, 1.0),
+            'colsample_bytree': Real(0.5, 1.0)
+        }
+
+        # Initialize BayesSearchCV
+        cv = RepeatedStratifiedKFold(n_splits=self.n_splits, n_repeats=self.n_repeats, random_state=self.random_state)
+        bayes_search = BayesSearchCV(estimator=self.clf, search_spaces=search_spaces, cv=cv, n_iter=10, scoring='accuracy', random_state=self.random_state, verbose=1, n_jobs=-1)
+        
+        # Apply SMOTEENN to the training data if balance is 'imbalanced'
+        X_resampled, y_resampled = self.apply_smoteenn()
+
+        # Fit BayesSearchCV with the resampled data
+        t0 = time.time()
+        bayes_result = bayes_search.fit(X_resampled, y_resampled)
+        print(f'\nTime taken = {round(time.time() - t0, 2)} sec')
+
+        # Print best score and parameters
+        print(f'Best score = {round(bayes_result.best_score_, 3)} using params: {bayes_result.best_params_}')
+
+        # Evaluate on test data
+        y_pred = bayes_result.best_estimator_.predict(self.X_test)
+        accuracy = accuracy_score(self.y_test, y_pred)
+        print(f'Test accuracy = {round(accuracy, 3)}')
+
+        return bayes_result, y_pred
+
+class LightGBM(BaseModel):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.clf = LGBMClassifier()
+
+    def run_bayesian_search(self):
+        print("\nRunning Bayesian Search for LightGBM...")
+        # Define the parameter space
+        search_spaces = {
+            'n_estimators': Integer(80, 150),
+            'max_depth': Integer(20, 30),
+            'learning_rate': Real(0.01, 0.2, prior='log-uniform'),
+            'subsample': Real(0.5, 1.0),
+            'colsample_bytree': Real(0.5, 1.0)
+        }
+
+        # Initialize BayesSearchCV
+        cv = RepeatedStratifiedKFold(n_splits=self.n_splits, n_repeats=self.n_repeats, random_state=self.random_state)
+        bayes_search = BayesSearchCV(estimator=self.clf, search_spaces=search_spaces, cv=cv, n_iter=10, scoring='accuracy', random_state=self.random_state, verbose=1, n_jobs=-1)
+        
+        # Apply SMOTEENN to the training data if balance is 'imbalanced'
+        X_resampled, y_resampled = self.apply_smoteenn()
+
+        # Fit BayesSearchCV with the resampled data
+        t0 = time.time()
+        bayes_result = bayes_search.fit(X_resampled, y_resampled)
+        print(f'\nTime taken = {round(time.time() - t0, 2)} sec')
+
+        # Print best score and parameters
+        print(f'Best score = {round(bayes_result.best_score_, 3)} using params: {bayes_result.best_params_}')
+
+        # Evaluate on test data
+        y_pred = bayes_result.best_estimator_.predict(self.X_test)
+        accuracy = accuracy_score(self.y_test, y_pred)
+        print(f'Test accuracy = {round(accuracy, 3)}')
+
+        return bayes_result, y_pred
+
+class AutoML:
+    def __init__(self, cleaned_df, target_column, balance='imbalanced', n_splits=5, n_repeats=3, random_state=123, evaluation_metric='recall'):
+        self.cleaned_df = cleaned_df
+        self.target_column = target_column
+        self.balance = balance
+        self.n_splits = n_splits
+        self.n_repeats = n_repeats
+        self.random_state = random_state
+        self.evaluation_metric = evaluation_metric
+        
+        # Initialize model classes
+        self.models = {
+            'DecisionTree': DT(cleaned_df, target_column, balance, n_splits, n_repeats, random_state),
+            'RandomForest': RandomForest(cleaned_df, target_column, balance, n_splits, n_repeats, random_state),
+            'XGBoost': XGBoost(cleaned_df, target_column, balance, n_splits, n_repeats, random_state),
+            'LightGBM': LightGBM(cleaned_df, target_column, balance, n_splits, n_repeats, random_state)
+        }
+
+    def evaluate_models(self):
+        results = {}
+        for name, model in self.models.items():
+            print(f'\nEvaluating {name}...')
+            best_model, y_pred = model.run_bayesian_search()
+            
+            # Compute metrics
+            accuracy = accuracy_score(model.y_test, y_pred)
+            precision = precision_score(model.y_test, y_pred, average='weighted')
+            recall = recall_score(model.y_test, y_pred, average='weighted')
+            f1 = f1_score(model.y_test, y_pred, average='weighted')
+            cm = confusion_matrix(model.y_test, y_pred)
+            tn, fp, fn, tp = cm.ravel()
+            
+            # Determine false negatives
+            false_negatives = fn
+            
+            results[name] = {
+                'accuracy': accuracy,
+                'precision': precision,
+                'recall': recall,
+                'f1': f1,
+                'false_negatives': false_negatives,
+                'classification_report': classification_report(model.y_test, y_pred),
+                'confusion_matrix': model.show_matrix(cm)
+            }
+            
+            # Print Classification Report and Confusion Matrix
+            print(f'Classification Report for {name}:\n{results[name]["classification_report"]}')
+            
+            # ROC and AUC
+            y_test_binarized = label_binarize(model.y_test, classes=np.unique(model.y_test))
+            y_pred_binarized = label_binarize(y_pred, classes=np.unique(model.y_test))
+            if y_test_binarized.shape[1] > 1:
+                for i in range(y_test_binarized.shape[1]):
+                    model.plot_roc_auc(y_test_binarized[:, i], y_pred_binarized[:, i], f'{name} ROC Curve for Class {i}')
+        
+        # Determine the best model
+        if self.evaluation_metric == 'false_negatives':
+            sorted_results = sorted(results.items(), key=lambda x: x[1]['false_negatives'])
+        else:
+            sorted_results = sorted(results.items(), key=lambda x: (x[1]['accuracy'], x[1][self.evaluation_metric]), reverse=True)
+        
+        best_model_name, best_model_metrics = sorted_results[0]
+        print(f'\nBest Model: {best_model_name}')
+        print(f'Accuracy: {best_model_metrics["accuracy"]}')
+        print(f'Precision: {best_model_metrics["precision"]}')
+        print(f'Recall: {best_model_metrics["recall"]}')
+        print(f'F1 Score: {best_model_metrics["f1"]}')
+        print(f'False Negatives: {best_model_metrics["false_negatives"]}')
+        print(f'Confusion Matrix:\n{best_model_metrics["confusion_matrix"]}')
+        
+        return best_model_name, best_model_metrics
+
+# Example usage
+# Assuming `reduced_df` is your DataFrame and 'thirtydaymortality' is your target column
+auto_ml = AutoML(reduced_df, target_column='thirtydaymortality', balance='imbalanced', evaluation_metric='false_negatives')
+best_model_name, best_model_metrics = auto_ml.evaluate_models()
+
+print(f'\nBest Model: {best_model_name}')
+print(f'Accuracy: {best_model_metrics["accuracy"]}')
+print(f'Precision: {best_model_metrics["precision"]}')
+print(f'Recall: {best_model_metrics["recall"]}')
+print(f'F1 Score: {best_model_metrics["f1"]}')
+print(f'False Negatives: {best_model_metrics["false_negatives"]}')
+print(f'Confusion Matrix:\n{best_model_metrics["confusion_matrix"]}')
+
+```
+
+Evaluating DecisionTree...
+
+Time taken = 34.53 sec
+
+Best score = 0.879 using params: OrderedDict(\[('ccp_alpha', 0.001131086677421503), ('criterion', 'entropy'), ('max_depth', 24), ('max_features', 'log2'), ('min_samples_leaf', 3), ('min_samples_split', 3)\])
+
+**Test accuracy = 0.882**
+
+![](images/clipboard-3184518635.png)
+
+![](images/clipboard-2704166000.png)
+
+Evaluating RandomForest...
+
+Time taken = 882.46 sec
+Best score = 0.97 using params: OrderedDict(\[('criterion', 'entropy'), ('max_depth', 27), ('max_features', 'sqrt'), ('min_samples_leaf', 2), ('min_samples_split', 3), ('n_estimators', 82)\])
+**Test accuracy = 0.956**
+
+![](images/clipboard-189649097.png)
+
+![](images/clipboard-998271002.png)
+
+Evaluating XGBoost...
+
+Time taken = 481.13 sec
+Best score = 0.973 using params: OrderedDict(\[('colsample_bytree', 0.8636816590466002), ('learning_rate', 0.0645354435221669), ('max_depth', 29), ('n_estimators', 108), ('subsample', 0.9220560088509978)\])
+**Test accuracy = 0.952**
+
+![](images/clipboard-388346725.png)
+
+![](images/clipboard-370685391.png)
+
+Evaluating LightGBM...
+
+Time taken = 234.32 sec
+Best score = 0.958 using params: OrderedDict(\[('colsample_bytree', 0.5133739717626367), ('learning_rate', 0.1941545477346783), ('max_depth', 24), ('n_estimators', 131), ('subsample', 0.8487299825534435)\])
+**Test accuracy = 0.941**
+
+![](images/clipboard-2732899064.png)
+
+![](images/clipboard-2798390817.png)
+
+[**Best Model: DecisionTree**]{.underline}
+Accuracy: 0.8822077718583516
+Precision: 0.9921306122285661
+Recall: 0.8822077718583516
+F1 Score: 0.9320824551973529
+False Negatives: 51
+Confusion Matrix:
+None
+
+::: {.notebox .lightbulb data-latex="lightbulb"}
+**Upon fine-tuning to context: Minimising False Negatives** The answer we obtained is actually different from our original best-choice model which was Random Forest. Now It is Decision Tree instead.
+:::
