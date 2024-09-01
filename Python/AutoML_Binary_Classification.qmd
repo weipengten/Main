@@ -23,6 +23,16 @@ I was intrigued that such a thing was possible and couldn't wait to try it, here
 
 `\[1.0.0\] - 2024-08-02 - Initial deployment after consolidating course work and initial refinement.`
 
+`\[1.0.1\] - 2024-09-01 - Added Context, Logistic Regression, Fine-tuned Models, Evaluation of Results for Multivariate Analysis, Logistic Regression, Machine Learning Predictions`
+
+## Context
+Predicting surgical risks is crucial for enhancing patient safety and improving surgical outcomes by allowing healthcare providers to tailor care and allocate resources effectively.
+
+By using real-world EMR data from obtained from Chan et al. (2018) [1], we aim to evaluate risk factors and develop predictive models to predict the following outcome:  **mortality within 30 days**. 
+
+## Methodology
+The obtained data set includes 90,785 surgery patients (excluded Cardiac and Neurosurgery patients) from Singapore General Hospital from 1 January 2012 to 31 October 2016. For each outcome, we developed a respective multivariate model to evaluate the risks factors and test out different machine learning model to see which model best predict the outcome. 
+
 ## Importing Libraries
 
 ```{python include=FALSE, eval=FALSE, code-fold=true, code-summary="Show the code"}
@@ -713,7 +723,7 @@ transformed_df.info()
 
 ![](images/clipboard-3862374559.png)![](images/clipboard-3784664671.png)
 
-### 4. In-depth analysis: Satistical modelling / Machine Learning
+### 4. In-depth analysis: Staistical modelling / Machine Learning
 
 #### Multivariate Analysis
 
@@ -725,7 +735,7 @@ class MultivariateAnalysis:
         self.target_variable = target_variable
         self.vif_threshold = vif_threshold
         self.corr_threshold = corr_threshold
-        
+
         # Drop target variable for analysis
         self.features_df = self.df.drop(columns=[self.target_variable])
 
@@ -749,12 +759,12 @@ class MultivariateAnalysis:
         numeric_df = df.select_dtypes(include=['float64', 'int64'])
         if numeric_df.empty:
             raise ValueError("DataFrame contains no numeric columns.")
-        
+
         # Add constant to the feature set for VIF calculation
         numeric_df_with_const = add_constant(numeric_df, has_constant='add')
         vif_data = pd.DataFrame()
         vif_data["Variable"] = numeric_df_with_const.columns
-        vif_data["VIF"] = [variance_inflation_factor(numeric_df_with_const.values, i) 
+        vif_data["VIF"] = [variance_inflation_factor(numeric_df_with_const.values, i)
                            for i in range(numeric_df_with_const.shape[1])]
         return vif_data
 
@@ -790,25 +800,25 @@ class MultivariateAnalysis:
     def run_analysis(self):
         # Preprocess data to include Boolean columns as numeric
         self.preprocess_data()
-        
+
         # Identify and drop high correlation variables
         high_corr_pairs = self.identify_high_corr_pairs()
         dropped_corr_vars = self.drop_high_corr_vars(high_corr_pairs)
-        
+
         # Plot correlation heatmap for remaining variables
         if not high_corr_pairs.empty:
             high_corr_vars = list(set(high_corr_pairs['feature1']).union(set(high_corr_pairs['feature2'])))
             high_corr_vars = [var for var in high_corr_vars if var in self.features_df.columns]
             self.plot_correlation_heatmap(high_corr_vars)
-        
+
         # Calculate and plot VIF
         vif_data = self.calculate_vif(self.features_df)
         print("Original VIF Data:")
         print(vif_data)
-        
+
         # Variables to keep for VIF reporting
         high_vif_vars = vif_data[vif_data["VIF"] > self.vif_threshold]
-        
+
         # Print table for high VIF variables
         if not high_vif_vars.empty:
             print("\nVariables with high VIF:")
@@ -818,18 +828,18 @@ class MultivariateAnalysis:
 
         # Drop variables with high VIF
         reduced_df = self.features_df.drop(columns=high_vif_vars['Variable'], errors='ignore')
-        
+
         # Recalculate VIF on reduced dataset
         reduced_vif_data = self.calculate_vif(reduced_df)
         print("\nNew VIF Data after dropping high VIF variables:")
         print(reduced_vif_data)
-        
+
         # Plot new VIF
         self.plot_vif(reduced_vif_data)
-        
+
         # Add target variable back to reduced_df
         reduced_df[self.target_variable] = self.df[self.target_variable]
-        
+
         return reduced_df, dropped_corr_vars, high_vif_vars, reduced_vif_data
 
 # Example usage
@@ -841,11 +851,140 @@ reduced_df, dropped_corr_vars, high_vif_vars, new_vif = ma.run_analysis()
 
 ![](images/clipboard-3373007464.png)
 
-![](images/clipboard-1693251949.png)
+![](images/clipboard-1854938830.png)
 
-![](images/clipboard-1846959993.png)
+::: {.notebox .lightbulb data-latex="lightbulb"}
+The `MultivariateAnalysis` class provides a comprehensive approach to handling multicollinearity in a dataset by leveraging Variance Inflation Factor (VIF) and correlation thresholds. This document summarizes the methods employed, presents the results, and evaluates the effectiveness of the analysis.
 
-![](images/clipboard-2809728910.png)
+**Methods Used**
+
+1.  **Data Preprocessing**
+
+-   *Objective:* Convert Boolean columns to numeric values.
+
+-   *Implementation:* Boolean columns are cast to integers to ensure compatibility with further analyses.
+
+2.  **Identifying High Correlation Pairs**
+
+-   *Objective:* Detect and address pairs of features with high correlation to mitigate multicollinearity.
+
+-   *Implementation:*
+
+    -   Compute the correlation matrix.
+
+    -   Identify pairs with correlation values exceeding the specified threshold.
+
+    -   Drop one feature from each high-correlation pair based on the overall sum of correlations.
+
+3.  **Variance Inflation Factor (VIF) Calculation**
+
+-   *Objective:* Assess multicollinearity for each feature.
+
+-   *Implementation:*
+
+    -   Compute VIF for all numeric features.
+
+    -   Features with VIF values above the specified threshold are flagged as problematic.
+
+4.  **Evaluation**
+
+-   By identifying and removing highly correlated variables and variables with high VIF, we improved the multicollinearity in our dataset. This process helps in creating more robust and interpretable models.
+
+-   The reduced dataset can now be used for further modeling and analysis with minimized multicollinearity issues.
+:::
+
+#### Estimate the Logistic Regression Model:
+
+```{python include=FALSE, eval=FALSE, code-fold=true, code-summary="Show the code"}
+# Assuming 'transformed_df' is your DataFrame and 'thirtydaymortality' is your target variable
+X = reduced_df.drop(columns=['thirtydaymortality'])
+y = reduced_df['thirtydaymortality']
+
+# Convert data to float
+X = X.astype(float)
+y = LabelEncoder().fit_transform(y)
+
+# Apply SMOTE to balance the dataset
+smote = SMOTE(random_state=42)
+X_resampled, y_resampled = smote.fit_resample(X, y)
+
+# Perform Grid Search with Logistic Regression using scikit-learn
+logreg = LogisticRegression(solver='liblinear')
+params = {'C': [1, 0.1, 0.01], 'penalty': ['l1', 'l2']}
+gs_logreg = GridSearchCV(logreg, param_grid=params, cv=5, scoring='roc_auc')
+gs_logreg.fit(X_resampled, y_resampled)
+
+# Display best parameters and score
+print("\nBest estimator average accuracy on train set: {:.4f}".format(gs_logreg.best_score_))
+print("Best C = {}".format(gs_logreg.best_params_))
+
+# Predict on the test set
+X_test = X  # Assuming you're using the same data for demonstration purposes
+y_test = y
+y_pred = gs_logreg.predict(X_test)
+y_pred_proba = gs_logreg.predict_proba(X_test)[:, 1]
+
+# Print accuracy and classification report
+print("\nAccuracy on test set: {:.4f}".format(gs_logreg.best_estimator_.score(X_test, y_test)))
+print("Test set classification report:\n", classification_report(y_test, y_pred))
+
+# Confusion Matrix
+cm = confusion_matrix(y_test, y_pred, labels=gs_logreg.classes_)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=gs_logreg.classes_)
+disp.plot()
+plt.title('Confusion Matrix')
+plt.show()
+
+# ROC Curve
+RocCurveDisplay.from_estimator(gs_logreg, X_test, y_test)
+plt.title('ROC Curve')
+plt.show()
+
+# Generate statistical report with p-values using statsmodels
+X_resampled_with_const = sm.add_constant(X_resampled)  # Add constant for intercept
+logit_model_resampled = sm.Logit(y_resampled, X_resampled_with_const)
+result_resampled = logit_model_resampled.fit_regularized()
+
+# Display the summary of the logistic regression model
+summary_resampled = result_resampled.summary()
+print(summary_resampled)
+
+# Set the maximum number of rows and columns to display
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_columns', None)
+
+# Print coefficients with p-values from the statsmodels summary
+coef_df = pd.DataFrame({
+    'Feature': ['Intercept'] + list(X.columns),
+    'Coefficient': result_resampled.params,
+    'P-Value': result_resampled.pvalues
+})
+
+```
+
+![](images/clipboard-2592243296.png)
+
+![](images/clipboard-3249462092.png){width="387"}
+
+![](images/clipboard-96420571.png){width="362"}
+
+![](images/clipboard-1055715652.png){width="545"}
+
+![](images/clipboard-2022614774.png){width="546"}
+
+::: {.notebox .lightbulb data-latex="lightbulb"}
+**Discussion on Results** - *Pseudo R-squared (0.5986):* Indicates that the model explains approximately 60% of the variability in the dependent variable, which suggests a good fit.
+
+-   *Log-Likelihood (-47051):* Measures how well the model fits the data. A higher (less negative) value would indicate a better fit.
+
+-   *Coefficients :*
+
+    -   *age_no_transform (1.3001):* For each unit increase in age, the log-odds of the event occurring increase by 1.3001. This translates to an increased probability of the event with age. Converting this to odds: an increase in age by one unit multiplies the odds of the event by exp(1.3001) ≈ 3.68. Hence, older individuals have significantly higher odds of the event occurring.
+
+    -   *gender_male (0.4632):* Being male increases the log-odds of the event by 0.4632. In terms of odds: exp(0.4632) ≈ 1.588. Thus, being male increases the odds of the event occurring by approximately 58.8%.
+
+-   *Significance (P\>\|z\|):* Most coefficients have p-values of 0.000, indicating that these predictors are statistically significant. Coefficients with higher p-values (e.g., agecategory_30-49 (0.091)) are less significant, meaning they may not be as impactful in predicting the outcome.
+:::
 
 #### Machine Learning (Individual Models)
 
@@ -1192,19 +1331,21 @@ Recall: 0.9561266060795989
 F1 Score: 0.9730480946301695
 
 ### 6. Tuning Model to industry and domain knowledge: avoiding false negatives
-In cancer diagnostics, **avoiding false negatives is particularly crucial**. Missing a cancer diagnosis can lead to delayed treatment, disease progression, and reduced survival rates, which are far more serious than the consequences of false positives, such as psychological distress, additional testing, or unnecessary treatment. Consequently, cancer screening programs tend to prioritize sensitivity to minimize the number of missed cases, even if it results in a higher rate of false positives.
 
-In this context, we fit and test the models similarly to the previous approach, but we specifically evaluate and **select the best model based on its ability to maintain a low false negative rate**.
+In cancer diagnostics, **avoiding false negatives is particularly crucial**. Missing a cancer diagnosis can lead to delayed treatment, disease progression, and reduced survival rates, which are far more serious than the consequences of false positives, such as psychological distress, additional testing, or unnecessary treatment. Consequently, cancer screening programs tend to prioritize AUC/sensitivity to minimize the number of missed cases, even if it results in a higher rate of false positives.
+
+In this context, we fit and test the models similarly to the previous approach, but we specifically evaluate and **select the best model based on sensitivity**.
 
 ```{python include=FALSE, eval=FALSE, code-fold=true, code-summary="Show the code"}
 class BaseModel:
-    def __init__(self, cleaned_df, target_column, balance='imbalanced', n_splits=5, n_repeats=3, random_state=123):
+    def __init__(self, cleaned_df, target_column, balance='imbalanced', n_splits=5, n_repeats=3, random_state=123, evaluation_metric='recall'):
         self.df = cleaned_df
         self.target_column = target_column
         self.balance = balance
         self.n_splits = n_splits
         self.n_repeats = n_repeats
         self.random_state = random_state
+        self.evaluation_metric = evaluation_metric
 
         # Prepare features and target variable
         self.X = self.df.drop(columns=[self.target_column])
@@ -1253,11 +1394,40 @@ class BaseModel:
         plt.title(title)
         plt.legend(loc="lower right")
         plt.show()
+        return roc_auc
+
+
+    def print_feature_importance(self, model_name):
+      if hasattr(self.clf, 'feature_importances_'):
+        importance = self.clf.feature_importances_
+        feature_names = self.X.columns
+
+        # Create a DataFrame for feature importances and sort it
+        feature_importance_df = pd.DataFrame({
+            'Feature': feature_names,
+            'Importance': importance
+        })
+        feature_importance_df = feature_importance_df.sort_values(by='Importance', ascending=False)
+
+        # Plot feature importances
+        plt.figure(figsize=(10, 6))
+        plt.barh(feature_importance_df['Feature'], feature_importance_df['Importance'])
+        plt.xlabel('Feature Importance Score')
+        plt.title(f'Feature Importance for {model_name}')
+        plt.show()
+
+    def print_tree_structure(self):
+      if isinstance(self.clf, tree.DecisionTreeClassifier):
+        # Plot the tree structure
+        plt.figure(figsize=(20, 10))
+        plot_tree(self.clf, feature_names=self.X.columns, filled=True, rounded=True)
+        plt.title("Decision Tree Visualization")
+        plt.show()
 
 class DT(BaseModel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.clf = DecisionTreeClassifier()
+        self.clf = tree.DecisionTreeClassifier(class_weight='balanced')
 
     def run_bayesian_search(self):
         print("\nRunning Bayesian Search for Decision Tree...")
@@ -1273,8 +1443,8 @@ class DT(BaseModel):
 
         # Initialize BayesSearchCV
         cv = RepeatedStratifiedKFold(n_splits=self.n_splits, n_repeats=self.n_repeats, random_state=self.random_state)
-        bayes_search = BayesSearchCV(estimator=self.clf, search_spaces=search_spaces, cv=cv, n_iter=10, scoring='accuracy', random_state=self.random_state, verbose=1, n_jobs=-1)
-        
+        bayes_search = BayesSearchCV(estimator=self.clf, search_spaces=search_spaces, cv=cv, n_iter=10, scoring=self.evaluation_metric, random_state=self.random_state, verbose=1, n_jobs=-1)
+
         # Apply SMOTEENN to the training data if balance is 'imbalanced'
         X_resampled, y_resampled = self.apply_smoteenn()
 
@@ -1282,6 +1452,9 @@ class DT(BaseModel):
         t0 = time.time()
         bayes_result = bayes_search.fit(X_resampled, y_resampled)
         print(f'\nTime taken = {round(time.time() - t0, 2)} sec')
+
+        # Update self.clf with the best estimator
+        self.clf = bayes_result.best_estimator_
 
         # Print best score and parameters
         print(f'Best score = {round(bayes_result.best_score_, 3)} using params: {bayes_result.best_params_}')
@@ -1291,12 +1464,18 @@ class DT(BaseModel):
         accuracy = accuracy_score(self.y_test, y_pred)
         print(f'Test accuracy = {round(accuracy, 3)}')
 
+
+      # Ensure the model is fitted before calling methods
+        if hasattr(self.clf, 'feature_importances_') or isinstance(self.clf, tree.DecisionTreeClassifier):
+            self.print_tree_structure()
+            self.print_feature_importance("Decision Tree")
+
         return bayes_result, y_pred
 
 class RandomForest(BaseModel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.clf = RandomForestClassifier()
+        self.clf = RandomForestClassifier(class_weight='balanced')
 
     def run_bayesian_search(self):
         print("\nRunning Bayesian Search for Random Forest...")
@@ -1312,8 +1491,8 @@ class RandomForest(BaseModel):
 
         # Initialize BayesSearchCV
         cv = RepeatedStratifiedKFold(n_splits=self.n_splits, n_repeats=self.n_repeats, random_state=self.random_state)
-        bayes_search = BayesSearchCV(estimator=self.clf, search_spaces=search_spaces, cv=cv, n_iter=10, scoring='accuracy', random_state=self.random_state, verbose=1, n_jobs=-1)
-        
+        bayes_search = BayesSearchCV(estimator=self.clf, search_spaces=search_spaces, cv=cv, n_iter=10, scoring=self.evaluation_metric, random_state=self.random_state, verbose=1, n_jobs=-1)
+
         # Apply SMOTEENN to the training data if balance is 'imbalanced'
         X_resampled, y_resampled = self.apply_smoteenn()
 
@@ -1321,6 +1500,10 @@ class RandomForest(BaseModel):
         t0 = time.time()
         bayes_result = bayes_search.fit(X_resampled, y_resampled)
         print(f'\nTime taken = {round(time.time() - t0, 2)} sec')
+
+
+        # Update self.clf with the best estimator
+        self.clf = bayes_result.best_estimator_
 
         # Print best score and parameters
         print(f'Best score = {round(bayes_result.best_score_, 3)} using params: {bayes_result.best_params_}')
@@ -1330,12 +1513,18 @@ class RandomForest(BaseModel):
         accuracy = accuracy_score(self.y_test, y_pred)
         print(f'Test accuracy = {round(accuracy, 3)}')
 
+        self.print_feature_importance("Random Forest")
         return bayes_result, y_pred
 
 class XGBoost(BaseModel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.clf = xgb.XGBClassifier(use_label_encoder=False, eval_metric='logloss')
+        self.scale_pos_weight = len(self.y_train[self.y_train == 0]) / len(self.y_train[self.y_train == 1])
+        self.clf = xgb.XGBClassifier(
+            use_label_encoder=False,
+            eval_metric='logloss',
+            scale_pos_weight=self.scale_pos_weight
+        )
 
     def run_bayesian_search(self):
         print("\nRunning Bayesian Search for XGBoost...")
@@ -1350,8 +1539,8 @@ class XGBoost(BaseModel):
 
         # Initialize BayesSearchCV
         cv = RepeatedStratifiedKFold(n_splits=self.n_splits, n_repeats=self.n_repeats, random_state=self.random_state)
-        bayes_search = BayesSearchCV(estimator=self.clf, search_spaces=search_spaces, cv=cv, n_iter=10, scoring='accuracy', random_state=self.random_state, verbose=1, n_jobs=-1)
-        
+        bayes_search = BayesSearchCV(estimator=self.clf, search_spaces=search_spaces, cv=cv, n_iter=10, scoring=self.evaluation_metric, random_state=self.random_state, verbose=1, n_jobs=-1)
+
         # Apply SMOTEENN to the training data if balance is 'imbalanced'
         X_resampled, y_resampled = self.apply_smoteenn()
 
@@ -1359,6 +1548,10 @@ class XGBoost(BaseModel):
         t0 = time.time()
         bayes_result = bayes_search.fit(X_resampled, y_resampled)
         print(f'\nTime taken = {round(time.time() - t0, 2)} sec')
+
+
+        # Update self.clf with the best estimator
+        self.clf = bayes_result.best_estimator_
 
         # Print best score and parameters
         print(f'Best score = {round(bayes_result.best_score_, 3)} using params: {bayes_result.best_params_}')
@@ -1368,12 +1561,15 @@ class XGBoost(BaseModel):
         accuracy = accuracy_score(self.y_test, y_pred)
         print(f'Test accuracy = {round(accuracy, 3)}')
 
+        self.print_feature_importance("XGBoost")
         return bayes_result, y_pred
 
 class LightGBM(BaseModel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.clf = LGBMClassifier()
+        self.scale_pos_weight = len(self.y_train[self.y_train == 0]) / len(self.y_train[self.y_train == 1])
+        self.class_weight = {0: 1, 1: self.scale_pos_weight}
+        self.clf = LGBMClassifier(class_weight=self.class_weight)
 
     def run_bayesian_search(self):
         print("\nRunning Bayesian Search for LightGBM...")
@@ -1388,8 +1584,8 @@ class LightGBM(BaseModel):
 
         # Initialize BayesSearchCV
         cv = RepeatedStratifiedKFold(n_splits=self.n_splits, n_repeats=self.n_repeats, random_state=self.random_state)
-        bayes_search = BayesSearchCV(estimator=self.clf, search_spaces=search_spaces, cv=cv, n_iter=10, scoring='accuracy', random_state=self.random_state, verbose=1, n_jobs=-1)
-        
+        bayes_search = BayesSearchCV(estimator=self.clf, search_spaces=search_spaces, cv=cv, n_iter=10, scoring=self.evaluation_metric, random_state=self.random_state, verbose=1, n_jobs=-1)
+
         # Apply SMOTEENN to the training data if balance is 'imbalanced'
         X_resampled, y_resampled = self.apply_smoteenn()
 
@@ -1397,6 +1593,10 @@ class LightGBM(BaseModel):
         t0 = time.time()
         bayes_result = bayes_search.fit(X_resampled, y_resampled)
         print(f'\nTime taken = {round(time.time() - t0, 2)} sec')
+
+
+        # Update self.clf with the best estimator
+        self.clf = bayes_result.best_estimator_
 
         # Print best score and parameters
         print(f'Best score = {round(bayes_result.best_score_, 3)} using params: {bayes_result.best_params_}')
@@ -1406,6 +1606,8 @@ class LightGBM(BaseModel):
         accuracy = accuracy_score(self.y_test, y_pred)
         print(f'Test accuracy = {round(accuracy, 3)}')
 
+
+        self.print_feature_importance("LightGBM")
         return bayes_result, y_pred
 
 class AutoML:
@@ -1417,7 +1619,7 @@ class AutoML:
         self.n_repeats = n_repeats
         self.random_state = random_state
         self.evaluation_metric = evaluation_metric
-        
+
         # Initialize model classes
         self.models = {
             'DecisionTree': DT(cleaned_df, target_column, balance, n_splits, n_repeats, random_state),
@@ -1431,7 +1633,7 @@ class AutoML:
         for name, model in self.models.items():
             print(f'\nEvaluating {name}...')
             best_model, y_pred = model.run_bayesian_search()
-            
+
             # Compute metrics
             accuracy = accuracy_score(model.y_test, y_pred)
             precision = precision_score(model.y_test, y_pred, average='weighted')
@@ -1439,36 +1641,60 @@ class AutoML:
             f1 = f1_score(model.y_test, y_pred, average='weighted')
             cm = confusion_matrix(model.y_test, y_pred)
             tn, fp, fn, tp = cm.ravel()
-            
+
+            # Calculate sensitivity (recall for positive class)
+            sensitivity = recall_score(model.y_test, y_pred, pos_label=1)
+
+            # Calculate specificity
+            specificity = tn / (tn + fp) if (tn + fp) > 0 else 0
+
             # Determine false negatives
             false_negatives = fn
-            
+
+            # Determine false positives
+            false_positives = fp
+
+
+            # ROC and AUC
+            y_test_binarized = label_binarize(model.y_test, classes=np.unique(model.y_test))
+            y_pred_binarized = label_binarize(y_pred, classes=np.unique(model.y_test))
+            if y_test_binarized.shape[1] > 1:
+                auc_scores = []
+                for i in range(y_test_binarized.shape[1]):
+                    auc = model.plot_roc_auc(y_test_binarized[:, i], y_pred_binarized[:, i], f'{name} ROC Curve for Class {i}')
+                    auc_scores.append(auc)
+                mean_auc = np.mean(auc_scores)
+            else:
+                auc = model.plot_roc_auc(model.y_test, y_pred, f'{name} ROC Curve')
+                mean_auc = auc
+
+            # Store results
             results[name] = {
                 'accuracy': accuracy,
                 'precision': precision,
                 'recall': recall,
                 'f1': f1,
                 'false_negatives': false_negatives,
+                'false_positives': false_positives,
+                'sensitivity': sensitivity,
+                'specificity': specificity,
                 'classification_report': classification_report(model.y_test, y_pred),
-                'confusion_matrix': model.show_matrix(cm)
+                'confusion_matrix': model.show_matrix(cm),
+                'auc': mean_auc
             }
-            
-            # Print Classification Report and Confusion Matrix
+
+            # Print Classification Report, Confusion Matrix, and AUC
             print(f'Classification Report for {name}:\n{results[name]["classification_report"]}')
-            
-            # ROC and AUC
-            y_test_binarized = label_binarize(model.y_test, classes=np.unique(model.y_test))
-            y_pred_binarized = label_binarize(y_pred, classes=np.unique(model.y_test))
-            if y_test_binarized.shape[1] > 1:
-                for i in range(y_test_binarized.shape[1]):
-                    model.plot_roc_auc(y_test_binarized[:, i], y_pred_binarized[:, i], f'{name} ROC Curve for Class {i}')
-        
+            print(f'AUC Score for {name}: {results[name]["auc"]}')
+            print(f'Sensitivity for {name}: {results[name]["sensitivity"]}')
+            print(f'Specificity for {name}: {results[name]["specificity"]}')
+
         # Determine the best model
-        if self.evaluation_metric == 'false_negatives':
-            sorted_results = sorted(results.items(), key=lambda x: x[1]['false_negatives'])
+        if self.evaluation_metric in ['false_negatives', 'false_positives']:
+            sorted_results = sorted(results.items(), key=lambda x: x[1][self.evaluation_metric])
         else:
-            sorted_results = sorted(results.items(), key=lambda x: (x[1]['accuracy'], x[1][self.evaluation_metric]), reverse=True)
-        
+            sorted_results = sorted(results.items(), key=lambda x: x[1][self.evaluation_metric], reverse=True)
+
         best_model_name, best_model_metrics = sorted_results[0]
         print(f'\nBest Model: {best_model_name}')
         print(f'Accuracy: {best_model_metrics["accuracy"]}')
@@ -1476,76 +1702,220 @@ class AutoML:
         print(f'Recall: {best_model_metrics["recall"]}')
         print(f'F1 Score: {best_model_metrics["f1"]}')
         print(f'False Negatives: {best_model_metrics["false_negatives"]}')
+        print(f'False Positives: {best_model_metrics["false_positives"]}')
+        print(f'AUC Score: {best_model_metrics["auc"]}')
         print(f'Confusion Matrix:\n{best_model_metrics["confusion_matrix"]}')
-        
+
         return best_model_name, best_model_metrics
+
 
 # Example usage
 # Assuming `reduced_df` is your DataFrame and 'thirtydaymortality' is your target column
-auto_ml = AutoML(reduced_df, target_column='thirtydaymortality', balance='imbalanced', evaluation_metric='false_negatives')
+auto_ml = AutoML(reduced_df, target_column='thirtydaymortality', balance='imbalanced', evaluation_metric='auc')
 best_model_name, best_model_metrics = auto_ml.evaluate_models()
-
-print(f'\nBest Model: {best_model_name}')
-print(f'Accuracy: {best_model_metrics["accuracy"]}')
-print(f'Precision: {best_model_metrics["precision"]}')
-print(f'Recall: {best_model_metrics["recall"]}')
-print(f'F1 Score: {best_model_metrics["f1"]}')
-print(f'False Negatives: {best_model_metrics["false_negatives"]}')
-print(f'Confusion Matrix:\n{best_model_metrics["confusion_matrix"]}')
 
 ```
 
 Evaluating DecisionTree...
 
-Time taken = 34.53 sec
+Time taken = 43.36 sec
 
-Best score = 0.879 using params: OrderedDict(\[('ccp_alpha', 0.001131086677421503), ('criterion', 'entropy'), ('max_depth', 24), ('max_features', 'log2'), ('min_samples_leaf', 3), ('min_samples_split', 3)\])
+Best score = 0.921 using params: OrderedDict(\[('ccp_alpha', 0.001131086677421503), ('criterion', 'entropy'), ('max_depth', 24), ('max_features', 'log2'), ('min_samples_leaf', 3), ('min_samples_split', 3)\])
 
-**Test accuracy = 0.882**
+**Test accuracy = 0.853**
 
-![](images/clipboard-3184518635.png)
+![](images/clipboard-2144372909.png)
 
-![](images/clipboard-2704166000.png)
+![](images/clipboard-3271840178.png){width="484"}
+
+![](images/clipboard-3492499816.png){width="471"}
+
+![](images/clipboard-759995167.png)
 
 Evaluating RandomForest...
 
-Time taken = 882.46 sec
-Best score = 0.97 using params: OrderedDict(\[('criterion', 'entropy'), ('max_depth', 27), ('max_features', 'sqrt'), ('min_samples_leaf', 2), ('min_samples_split', 3), ('n_estimators', 82)\])
-**Test accuracy = 0.956**
+Time taken = 1131.54 sec Best score = 0.99 using params: OrderedDict(\[('criterion', 'entropy'), ('max_depth', 27), ('max_features', 'sqrt'), ('min_samples_leaf', 2), ('min_samples_split', 3), ('n_estimators', 82)\])
 
-![](images/clipboard-189649097.png)
+**Test accuracy = 0.975**
 
-![](images/clipboard-998271002.png)
+![](images/clipboard-472869976.png)
+
+![](images/clipboard-3293245603.png)
+
+![](images/clipboard-3815466419.png)
+
+![](images/clipboard-1034884692.png)
 
 Evaluating XGBoost...
 
-Time taken = 481.13 sec
-Best score = 0.973 using params: OrderedDict(\[('colsample_bytree', 0.8636816590466002), ('learning_rate', 0.0645354435221669), ('max_depth', 29), ('n_estimators', 108), ('subsample', 0.9220560088509978)\])
-**Test accuracy = 0.952**
+Time taken = 569.31 sec Best score = 0.999 using params: OrderedDict(\[('colsample_bytree', 0.6654338738457878), ('learning_rate', 0.038882847597077025), ('max_depth', 21), ('n_estimators', 127), ('subsample', 0.7398225001914931)\])
 
-![](images/clipboard-388346725.png)
+**Test accuracy = 0.91**
 
-![](images/clipboard-370685391.png)
+![](images/clipboard-1553979538.png)
+
+![](images/clipboard-1898839044.png)
+
+![](images/clipboard-414980368.png)
+
+![](images/clipboard-2446320798.png)
 
 Evaluating LightGBM...
 
-Time taken = 234.32 sec
-Best score = 0.958 using params: OrderedDict(\[('colsample_bytree', 0.5133739717626367), ('learning_rate', 0.1941545477346783), ('max_depth', 24), ('n_estimators', 131), ('subsample', 0.8487299825534435)\])
-**Test accuracy = 0.941**
+Time taken = 259.26 sec Best score = 1.0 using params: OrderedDict(\[('colsample_bytree', 0.8840100626990215), ('learning_rate', 0.017347709137475083), ('max_depth', 20), ('n_estimators', 132), ('subsample', 0.9722507666816909)\])
 
-![](images/clipboard-2732899064.png)
+**Test accuracy = 0.67**
 
-![](images/clipboard-2798390817.png)
+![](images/clipboard-2294252204.png)
 
-[**Best Model: DecisionTree**]{.underline}
-Accuracy: 0.8822077718583516
-Precision: 0.9921306122285661
-Recall: 0.8822077718583516
-F1 Score: 0.9320824551973529
-False Negatives: 51
-Confusion Matrix:
-None
+![](images/clipboard-3824491189.png)
+
+![](images/clipboard-4063952050.png)
+
+![](images/clipboard-1205127027.png)
+
+### 7. Model Evaluation Summary
+
+#### 1. Decision Tree
+
+**Best Parameters:** - `ccp_alpha`: 0.0011 - `criterion`: 'entropy' - `max_depth`: 24 - `max_features`: 'log2' - `min_samples_leaf`: 3 - `min_samples_split`: 3
+
+**Test Accuracy:** 0.853
+
+**Classification Report:**
+
+| Metric       | Class 0 | Class 1 |
+|--------------|---------|---------|
+| Precision    | 1.00    | 0.03    |
+| Recall       | 0.85    | 0.76    |
+| F1-Score     | 0.92    | 0.06    |
+| Macro Avg    | 0.51    | 0.81    |
+| Weighted Avg | 0.99    | 0.85    |
+
+**AUC Score:** 0.808
+
+**Sensitivity:** 0.764\
+**Specificity:** 0.853
+
+**Discussion:**
+
+-   **Strengths:** The Decision Tree model has high accuracy (0.853) and relatively good recall for the majority class (0.76 for class 1). The AUC score of 0.808 indicates decent performance in distinguishing between classes.
+-   **Weaknesses:** Precision for the minority class is very low (0.03), and the F1-Score is also very low (0.06), reflecting poor performance in correctly identifying the positive class (class 1). The model struggles with class imbalance.
+
+#### 2. Random Forest
+
+**Best Parameters:** - `criterion`: 'entropy' - `max_depth`: 27 - `max_features`: 'sqrt' - `min_samples_leaf`: 2 - `min_samples_split`: 3 - `n_estimators`: 82
+
+**Test Accuracy:** 0.975
+
+**Classification Report:**
+
+| Metric       | Class 0 | Class 1 |
+|--------------|---------|---------|
+| Precision    | 1.00    | 0.09    |
+| Recall       | 0.98    | 0.35    |
+| F1-Score     | 0.99    | 0.14    |
+| Macro Avg    | 0.54    | 0.66    |
+| Weighted Avg | 0.99    | 0.97    |
+
+**AUC Score:** 0.665
+
+**Sensitivity:** 0.351\
+**Specificity:** 0.978
+
+**Discussion:**
+
+-   **Strengths:** High accuracy (0.975) and good recall for the majority class (0.35 for class 1). The Random Forest model shows strong performance for the majority class.
+-   **Weaknesses:** Precision for the minority class is extremely low (0.09), indicating poor performance in identifying the positive class. The AUC score of 0.665 suggests weaker discriminatory performance compared to other models.
+
+#### 3. XGBoost
+
+**Best Parameters:** - `colsample_bytree`: 0.665 - `learning_rate`: 0.039 - `max_depth`: 21 - `n_estimators`: 127 - `subsample`: 0.740
+
+**Test Accuracy:** 0.910
+
+**Classification Report:**
+
+| Metric       | Class 0 | Class 1 |
+|--------------|---------|---------|
+| Precision    | 1.00    | 0.03    |
+| Recall       | 0.91    | 0.53    |
+| F1-Score     | 0.95    | 0.06    |
+| Macro Avg    | 0.52    | 0.72    |
+| Weighted Avg | 0.99    | 0.91    |
+
+**AUC Score:** 0.723
+
+**Sensitivity:** 0.534\
+**Specificity:** 0.913
+
+**Discussion:**
+
+-   **Strengths:** High accuracy (0.910) and good recall for the majority class (0.53 for class 1).
+-   **Weaknesses:** The XGBoost model has low precision (0.03) and F1-Score (0.06) for the minority class. The AUC score of 0.723 shows limited effectiveness in distinguishing between classes.
+
+#### 4. LightGBM
+
+**Best Parameters:** - `colsample_bytree`: 0.884 - `learning_rate`: 0.017 - `max_depth`: 20 - `n_estimators`: 132 - `subsample`: 0.972
+
+**Test Accuracy:** 0.670
+
+**Classification Report:**
+
+| Metric       | Class 0 | Class 1 |
+|--------------|---------|---------|
+| Precision    | 1.00    | 0.01    |
+| Recall       | 0.67    | 0.84    |
+| F1-Score     | 0.80    | 0.03    |
+| Macro Avg    | 0.51    | 0.76    |
+| Weighted Avg | 0.99    | 0.67    |
+
+**AUC Score:** 0.757
+
+**Sensitivity:** 0.845\
+**Specificity:** 0.669
+
+**Discussion:**
+
+-   **Strengths:** High recall for the minority class (0.84). The model achieves a good balance between precision and recall for the majority class.
+-   **Weaknesses:** Low precision (0.01) and F1-Score (0.03) for the minority class. The AUC score of 0.757 indicates limited ability to discriminate between the classes.
+
+#### Best Model (AUC): Decision Tree
+
+**Accuracy:** 0.853\
+**Precision:** 0.993 (for class 0), 0.03 (for class 1)\
+**Recall:** 0.85 (for class 0), 0.76 (for class 1)\
+**F1 Score:** 0.92 (for class 0), 0.06 (for class 1)\
+**False Negatives:** 35\
+**AUC Score:** 0.808
+
+**Discussion:**
+
+-   **Strengths:** The Decision Tree model has the highest recall for the minority class among the models evaluated, with an AUC score of 0.808, indicating better performance in distinguishing between classes compared to other models.
+-   **Weaknesses:** Precision for the minority class remains low, which is a common issue in imbalanced datasets. The F1-Score for the minority class is also low, indicating that while the recall is better, precision is lacking.
+
+#### Overall Recommendations
+
+To improve performance, consider the following strategies:
+
+-   **Resampling:** Experiment with more methods to deal with imbalance.
+-   **Class Weights:** Adjust class weights in the model to give more importance to the minority class.
+-   **Ensemble Methods:** Combine predictions from multiple models to improve performance on the minority class.
+-   **SVMs:** Consider using SVMs with dimensionality reduction techniques instead of dropping potentially critical variables.
+
+#### Performance Metrics Comparison
+
+| Model         | Accuracy | Precision | Recall (Sensitivity) | Specificity | AUC   |
+|------------|------------|------------|--------------|------------|------------|
+| Decision Tree | 0.853    | 0.993     | 0.764                | 0.853       | 0.808 |
+| Random Forest | 0.975    | 0.990     | 0.351                | 0.978       | 0.665 |
+| XGBoost       | 0.910    | 0.999     | 0.534                | 0.913       | 0.723 |
+| LightGBM      | 0.670    | 1.000     | 0.845                | 0.669       | 0.757 |
 
 ::: {.notebox .lightbulb data-latex="lightbulb"}
-**Upon fine-tuning to context: Minimising False Negatives** The answer we obtained is actually different from our original best-choice model which was Random Forest. Now It is Decision Tree instead.
+**Upon fine-tuning to context: Minimising False Negatives**
+
+The **Decision Tree** model performs best in terms of recall for the minority class and AUC score among the models evaluated.
+
+HOWEVER, sensitivity score (0.845) is higher for **LightGBM** instead even though it has less AUC score (0.757). **LightGBM** is the ideal model for our scenario.
 :::
