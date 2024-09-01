@@ -11,7 +11,7 @@ date: "2024-08-02"
 format: html
 ---
 
-![](images/clipboard-2913337989.png)
+![](images/Capture.PNG)
 
 ## Introduction
 
@@ -26,12 +26,14 @@ I was intrigued that such a thing was possible and couldn't wait to try it, here
 `\[1.0.1\] - 2024-09-01 - Added Context, Logistic Regression, Fine-tuned Models, Evaluation of Results for Multivariate Analysis, Logistic Regression, Machine Learning Predictions`
 
 ## Context
+
 Predicting surgical risks is crucial for enhancing patient safety and improving surgical outcomes by allowing healthcare providers to tailor care and allocate resources effectively.
 
-By using real-world EMR data from obtained from Chan et al. (2018) [1], we aim to evaluate risk factors and develop predictive models to predict the following outcome:  **mortality within 30 days**. 
+By using real-world EMR data from obtained from Chan et al. (2018) \[1\], we aim to evaluate risk factors and develop predictive models to predict the following outcome: **mortality within 30 days**.
 
 ## Methodology
-The obtained data set includes 90,785 surgery patients (excluded Cardiac and Neurosurgery patients) from Singapore General Hospital from 1 January 2012 to 31 October 2016. For each outcome, we developed a respective multivariate model to evaluate the risks factors and test out different machine learning model to see which model best predict the outcome. 
+
+The obtained data set includes 90,785 surgery patients (excluded Cardiac and Neurosurgery patients) from Singapore General Hospital from 1 January 2012 to 31 October 2016. For each outcome, we developed a respective multivariate model to evaluate the risks factors and test out different machine learning model to see which model best predict the outcome.
 
 ## Importing Libraries
 
@@ -1724,13 +1726,13 @@ Best score = 0.921 using params: OrderedDict(\[('ccp_alpha', 0.00113108667742150
 
 **Test accuracy = 0.853**
 
-![](images/clipboard-2144372909.png)
+![](images/clipboard-2144372909.png){width="553"}
 
-![](images/clipboard-3271840178.png){width="484"}
+![](images/clipboard-3271840178.png){width="424"}
 
-![](images/clipboard-3492499816.png){width="471"}
+![](images/clipboard-3492499816.png){width="419"}
 
-![](images/clipboard-759995167.png)
+![](images/clipboard-759995167.png){width="410"}
 
 Evaluating RandomForest...
 
@@ -1738,13 +1740,13 @@ Time taken = 1131.54 sec Best score = 0.99 using params: OrderedDict(\[('criteri
 
 **Test accuracy = 0.975**
 
-![](images/clipboard-472869976.png)
+![](images/clipboard-472869976.png){width="581"}
 
-![](images/clipboard-3293245603.png)
+![](images/clipboard-3293245603.png){width="427"}
 
-![](images/clipboard-3815466419.png)
+![](images/clipboard-3815466419.png){width="412"}
 
-![](images/clipboard-1034884692.png)
+![](images/clipboard-1034884692.png){width="416"}
 
 Evaluating XGBoost...
 
@@ -1752,13 +1754,13 @@ Time taken = 569.31 sec Best score = 0.999 using params: OrderedDict(\[('colsamp
 
 **Test accuracy = 0.91**
 
-![](images/clipboard-1553979538.png)
+![](images/clipboard-1553979538.png){width="560"}
 
-![](images/clipboard-1898839044.png)
+![](images/clipboard-1898839044.png){width="440"}
 
-![](images/clipboard-414980368.png)
+![](images/clipboard-414980368.png){width="447"}
 
-![](images/clipboard-2446320798.png)
+![](images/clipboard-2446320798.png){width="446"}
 
 Evaluating LightGBM...
 
@@ -1766,13 +1768,13 @@ Time taken = 259.26 sec Best score = 1.0 using params: OrderedDict(\[('colsample
 
 **Test accuracy = 0.67**
 
-![](images/clipboard-2294252204.png)
+![](images/clipboard-2294252204.png){width="554"}
 
-![](images/clipboard-3824491189.png)
+![](images/clipboard-3824491189.png){width="432"}
 
-![](images/clipboard-4063952050.png)
+![](images/clipboard-4063952050.png){width="447"}
 
-![](images/clipboard-1205127027.png)
+![](images/clipboard-1205127027.png){width="447"}
 
 ### 7. Model Evaluation Summary
 
@@ -1906,7 +1908,7 @@ To improve performance, consider the following strategies:
 #### Performance Metrics Comparison
 
 | Model         | Accuracy | Precision | Recall (Sensitivity) | Specificity | AUC   |
-|------------|------------|------------|--------------|------------|------------|
+|------------|------------|------------|------------|------------|------------|
 | Decision Tree | 0.853    | 0.993     | 0.764                | 0.853       | 0.808 |
 | Random Forest | 0.975    | 0.990     | 0.351                | 0.978       | 0.665 |
 | XGBoost       | 0.910    | 0.999     | 0.534                | 0.913       | 0.723 |

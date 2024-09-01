@@ -275,7 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><img src="images/clipboard-2913337989.png" class="img-fluid"></p>
+<p><img src="images/Capture.PNG" class="img-fluid"></p>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Hello everyone, this post is intended to demonstrate how it is possible to automate some of the evaluation process in deciding which machine learning models to utilise to achieve the best desired results, which is commonly know as <strong>AutoML.</strong></p>
@@ -295,7 +295,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="importing-libraries" class="level2">
 <h2 class="anchored" data-anchor-id="importing-libraries">Importing Libraries</h2>
-<div id="15c1c3c7" class="cell" data-execution_count="1">
+<div id="a50b9300" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Importing necessary libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -330,7 +330,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="load-the-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="load-the-dataset">Load the Dataset</h2>
 <p>This Python code snippet uses TensorFlow’s Keras API to load the CIFAR-10 dataset and print the shapes of the training and test sets. The CIFAR-10 dataset is a popular dataset used for training machine learning and computer vision algorithms. It consists of 60,000 32x32 color images in 10 different classes, with 6,000 images per class.</p>
-<div id="bd468e2c" class="cell" data-execution_count="2">
+<div id="3c2574a1" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/weipengten/ISSS623GroupProject--Applied-Healthcare-/main/CARES_data.xlsx'</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_excel(url, index_col<span class="op">=</span><span class="st">'Indexno'</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -352,7 +352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <section id="replace-missing-values-with-nan" class="level3">
 <h3 class="anchored" data-anchor-id="replace-missing-values-with-nan">Replace missing values with nan</h3>
-<div id="d935e297" class="cell" data-execution_count="3">
+<div id="223c521c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># replace missing values with pd.NA</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>null_values <span class="op">=</span> [<span class="st">'#NULL!'</span>, <span class="st">'BLANK'</span>, <span class="st">'none'</span>, <span class="st">'NA'</span>, <span class="st">'&lt;NA&gt;'</span>, <span class="st">'None'</span>]</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df.replace(null_values, np.nan, inplace<span class="op">=</span><span class="va">True</span>)</span>
@@ -361,7 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="images/clipboard-4006132243.png" class="img-fluid"></p>
-<div id="e3136396" class="cell" data-execution_count="4">
+<div id="c95b81c9" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># statistical summary</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -369,7 +369,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="string-formatting" class="level3">
 <h3 class="anchored" data-anchor-id="string-formatting">String formatting</h3>
-<div id="d9bada44" class="cell" data-execution_count="5">
+<div id="c00a64a9" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># replace all column names with lowercase and replace spaces with underscores</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df.columns <span class="op">=</span> df.columns.<span class="bu">str</span>.lower().<span class="bu">str</span>.replace(<span class="st">' '</span>, <span class="st">'_'</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -379,7 +379,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="replace-missing-values-with-nan-1" class="level3">
 <h3 class="anchored" data-anchor-id="replace-missing-values-with-nan-1">Replace missing values with nan</h3>
-<div id="0e4e5b8a" class="cell" data-execution_count="6">
+<div id="e73a9667" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># replace missing values with pd.NA</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>null_values <span class="op">=</span> [<span class="st">'#NULL!'</span>, <span class="st">'BLANK'</span>, <span class="st">'none'</span>, <span class="st">'NA'</span>, <span class="st">'&lt;NA&gt;'</span>, <span class="st">'None'</span>]</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df.replace(null_values, np.nan, inplace<span class="op">=</span><span class="va">True</span>)</span>
@@ -390,7 +390,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="images/clipboard-263768488.png" class="img-fluid"></p>
 <section id="check-potential-duplicates" class="level4">
 <h4 class="anchored" data-anchor-id="check-potential-duplicates">Check potential duplicates</h4>
-<div id="0f5d0a46" class="cell" data-execution_count="7">
+<div id="dc9a26e9" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check potential duplicates</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df.duplicated().<span class="bu">sum</span>()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -401,7 +401,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="find-all-unique-values-for-categorical-features" class="level4">
 <h4 class="anchored" data-anchor-id="find-all-unique-values-for-categorical-features">Find all unique values for categorical features</h4>
-<div id="b5a75479" class="cell" data-execution_count="8">
+<div id="3a69aef7" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find all unique values for categorical features</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column <span class="kw">in</span> df.select_dtypes(include<span class="op">=</span>[<span class="st">'object'</span>]).columns:</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>column<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>df[column]<span class="sc">.</span>unique()<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -411,7 +411,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="create-bins-for-age-as-age_bins" class="level3">
 <h3 class="anchored" data-anchor-id="create-bins-for-age-as-age_bins">Create bins for age as age_bins</h3>
-<div id="6431d6e4" class="cell" data-execution_count="9">
+<div id="0a218e75" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># bin the age column</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>age_bins <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">90</span>, <span class="dv">100</span>, <span class="dv">110</span>]</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>age_labels <span class="op">=</span> [<span class="st">'0-10'</span>, <span class="st">'11-20'</span>, <span class="st">'21-30'</span>, <span class="st">'31-40'</span>, <span class="st">'41-50'</span>, <span class="st">'51-60'</span>, <span class="st">'61-70'</span>, <span class="st">'71-80'</span>, <span class="st">'81-90'</span>, <span class="st">'91-100'</span>, <span class="st">'101-110'</span>]</span>
@@ -434,7 +434,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="create-bins-for-rcri_score-as-rcri_bin" class="level3">
 <h3 class="anchored" data-anchor-id="create-bins-for-rcri_score-as-rcri_bin">Create bins for rcri_score as rcri_bin</h3>
-<div id="8e35bc08" class="cell" data-execution_count="10">
+<div id="eef910bf" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to bin 'RCRI score' into distinct ordinal categories</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> smart_binning(df, column_name, bin_column_name):</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a copy of the DataFrame to avoid modifying the original</span></span>
@@ -479,7 +479,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="images/clipboard-393517675.png" class="img-fluid"></p>
 <section id="visualize-correlation-for-numerical-column" class="level4">
 <h4 class="anchored" data-anchor-id="visualize-correlation-for-numerical-column">Visualize correlation for numerical column</h4>
-<div id="3a2826be" class="cell" data-execution_count="11">
+<div id="1e4aff92" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>correlation_matrix <span class="op">=</span> df.select_dtypes(include<span class="op">=</span>[<span class="st">'number'</span>]).corr()</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>fontsize<span class="op">=</span><span class="dv">8</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">6</span>))</span>
@@ -494,7 +494,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="drop-rows-with-at-least-10-missing-values-in-columns-93.73-remaining" class="level3">
 <h3 class="anchored" data-anchor-id="drop-rows-with-at-least-10-missing-values-in-columns-93.73-remaining">Drop rows with at least 10 missing values in columns, 93.73% remaining</h3>
-<div id="33272566" class="cell" data-execution_count="12">
+<div id="c8c98f3b" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define the threshold for missing values</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>threshold <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>missing_counts <span class="op">=</span> df.isna().<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
@@ -510,7 +510,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="images/clipboard-2865351042.png" class="img-fluid"></p>
 <section id="data-validation" class="level4">
 <h4 class="anchored" data-anchor-id="data-validation">Data Validation</h4>
-<div id="b4c20ed4" class="cell" data-execution_count="13">
+<div id="6564b7f0" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the condition</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>condition_check <span class="op">=</span> df[df[<span class="st">'thirtydaymortality'</span>] <span class="op">==</span> <span class="va">True</span>][<span class="st">'mortality'</span>] <span class="op">==</span> <span class="va">True</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -542,7 +542,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="outlier-detection-for-numerical-features" class="level4">
 <h4 class="anchored" data-anchor-id="outlier-detection-for-numerical-features">Outlier detection for numerical features</h4>
-<div id="845a2ee7" class="cell" data-execution_count="14">
+<div id="ea7ab691" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>numerical_columns <span class="op">=</span> df.select_dtypes(include<span class="op">=</span>[<span class="st">'number'</span>]).columns</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Numerical columns:"</span>, numerical_columns)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -560,7 +560,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="numerical-columns-remaining-columns-except-for-daysbetweendeathandoperation-impute-missing-values-with-median" class="level3">
 <h3 class="anchored" data-anchor-id="numerical-columns-remaining-columns-except-for-daysbetweendeathandoperation-impute-missing-values-with-median">NUMERICAL columns (remaining columns except for DaysbetweenDeathandoperation): impute missing values with median)</h3>
-<div id="cbbe3896" class="cell" data-execution_count="15">
+<div id="88f9d5e3" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize SimpleImputer to fill missing values with the median</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>imp <span class="op">=</span> SimpleImputer(missing_values<span class="op">=</span>np.nan, strategy<span class="op">=</span><span class="st">'median'</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -589,7 +589,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="categorical-columns-remaining-columns-except-for-mortality-daysbetweendeathandoperation-30daymortality-thirtydaymortality-impute-missing-values-with-none" class="level3">
 <h3 class="anchored" data-anchor-id="categorical-columns-remaining-columns-except-for-mortality-daysbetweendeathandoperation-30daymortality-thirtydaymortality-impute-missing-values-with-none">CATEGORICAL columns (remaining columns except for <span class="citation" data-cites="30daymortality">['mortality', 'daysbetweendeathandoperation', ' @30daymortality', 'thirtydaymortality']</span>): impute missing values with ‘None’</h3>
-<div id="ced6ba6f" class="cell" data-execution_count="16">
+<div id="fd525c40" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize SimpleImputer for categorical columns to fill missing values with 'None'</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>cat_imp <span class="op">=</span> SimpleImputer(missing_values<span class="op">=</span>np.nan, strategy<span class="op">=</span><span class="st">'constant'</span>, fill_value<span class="op">=</span><span class="st">'None'</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -633,7 +633,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>daysbetweendeathandoperation</p></li>
 </ul></li>
 </ul>
-<div id="062715f4" class="cell" data-execution_count="17">
+<div id="2ba4645d" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature Selection:</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># drop unecessary columns, features that occur only after the target result should be excluded</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>features_to_exclude <span class="op">=</span> [<span class="st">'mortality'</span>, <span class="st">'daysbetweendeathandoperation'</span>, <span class="st">'@30daymortality'</span>]</span>
@@ -656,7 +656,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="numerical-features-transformation">Numerical features Transformation</h4>
 <section id="test-for-normality" class="level5">
 <h5 class="anchored" data-anchor-id="test-for-normality">Test for Normality</h5>
-<div id="3eccb742" class="cell" data-execution_count="18">
+<div id="fb9ba331" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test for normality of numeric columns: ALL are not normally distributed</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -715,7 +715,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="distribution-of-numeric-columns" class="level5">
 <h5 class="anchored" data-anchor-id="distribution-of-numeric-columns">Distribution of numeric columns</h5>
-<div id="1c13acee" class="cell" data-execution_count="19">
+<div id="8e82d8fd" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_histograms(df,columns):</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Number of columns to plot</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    num_cols <span class="op">=</span> <span class="bu">len</span>(columns)</span>
@@ -745,7 +745,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="automation-of-transforming-numeric-columns-based-on-skewness" class="level5">
 <h5 class="anchored" data-anchor-id="automation-of-transforming-numeric-columns-based-on-skewness">Automation of transforming numeric columns based on skewness</h5>
-<div id="4bf5b123" class="cell" data-execution_count="20">
+<div id="055e321c" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_skewness(df,columns):</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Dictionary to store skewness values</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    skewness_dict <span class="op">=</span> {}</span>
@@ -863,7 +863,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="comparison-of-newly-transformed-variables-as-compared-to-orignal-in-terms-of-skewness" class="level5">
 <h5 class="anchored" data-anchor-id="comparison-of-newly-transformed-variables-as-compared-to-orignal-in-terms-of-skewness">Comparison of newly transformed variables as compared to orignal in terms of skewness</h5>
-<div id="5771fefd" class="cell" data-execution_count="21">
+<div id="392ce6c1" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate skewness for original columns</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>skewness_original <span class="op">=</span> calculate_skewness(df,numeric_cols).set_index(<span class="st">'Column'</span>)[<span class="st">'Skewness'</span>].to_dict()</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -901,7 +901,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="standardize-all-newly-transformed-columns" class="level5">
 <h5 class="anchored" data-anchor-id="standardize-all-newly-transformed-columns">Standardize all newly transformed columns</h5>
-<div id="8e5703ef" class="cell" data-execution_count="22">
+<div id="fdb668cb" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>std_scaler <span class="op">=</span> StandardScaler()</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>transformed_df[new_columns_numeric] <span class="op">=</span> std_scaler.fit_transform(transformed_df[new_columns_numeric])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -909,7 +909,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="categorical-features-processing-one--hot-encoding-all-features" class="level4">
 <h4 class="anchored" data-anchor-id="categorical-features-processing-one--hot-encoding-all-features">Categorical features processing: One- hot encoding all features</h4>
-<div id="dec646cd" class="cell" data-execution_count="23">
+<div id="9fc92af8" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># List all categorical columns in the DataFrame</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>categorical_columns  <span class="op">=</span> transformed_df.select_dtypes(include<span class="op">=</span>[<span class="st">'object'</span>]).columns</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -928,13 +928,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="final-cleaning-and-consolidation-of-processed-numerical-and-categorical-columns" class="level4">
 <h4 class="anchored" data-anchor-id="final-cleaning-and-consolidation-of-processed-numerical-and-categorical-columns">Final Cleaning and Consolidation of Processed Numerical and Categorical columns</h4>
-<div id="859918b8" class="cell" data-execution_count="24">
+<div id="6ae052df" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop the original categorical columns</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>transformed_df.drop(categorical_columns, axis<span class="op">=</span><span class="dv">1</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop the original numeric columns</span></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>transformed_df.drop(numeric_cols, axis<span class="op">=</span><span class="dv">1</span>, inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="f95d7eb6" class="cell" data-execution_count="25">
+<div id="9a8bfb9b" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>transformed_df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="images/clipboard-3862374559.png" class="img-fluid"><img src="images/clipboard-3784664671.png" class="img-fluid"></p>
@@ -944,7 +944,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="in-depth-analysis-staistical-modelling-machine-learning">4. In-depth analysis: Staistical modelling / Machine Learning</h3>
 <section id="multivariate-analysis" class="level4">
 <h4 class="anchored" data-anchor-id="multivariate-analysis">Multivariate Analysis</h4>
-<div id="ea95131f" class="cell" data-execution_count="26">
+<div id="8eba7e37" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MultivariateAnalysis:</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, transformed_df, target_variable, vif_threshold<span class="op">=</span><span class="dv">10</span>, corr_threshold<span class="op">=</span><span class="fl">0.8</span>):</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> transformed_df</span>
@@ -1109,7 +1109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="estimate-the-logistic-regression-model" class="level4">
 <h4 class="anchored" data-anchor-id="estimate-the-logistic-regression-model">Estimate the Logistic Regression Model:</h4>
-<div id="ba657355" class="cell" data-execution_count="27">
+<div id="a2ea6d36" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'transformed_df' is your DataFrame and 'thirtydaymortality' is your target variable</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> reduced_df.drop(columns<span class="op">=</span>[<span class="st">'thirtydaymortality'</span>])</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> reduced_df[<span class="st">'thirtydaymortality'</span>]</span>
@@ -1200,7 +1200,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="comparison-and-evaluation-automate-the-evaluation-process" class="level3">
 <h3 class="anchored" data-anchor-id="comparison-and-evaluation-automate-the-evaluation-process">5. Comparison and Evaluation: Automate the evaluation process</h3>
 <p>Automate the model training and evaluation process, and generate comprehensive results and key evaluation reports to assess the validity and effectiveness of the chosen model.</p>
-<div id="9d06f9c2" class="cell" data-execution_count="28">
+<div id="3b18edf6" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BaseModel:</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, cleaned_df, target_column, balance<span class="op">=</span><span class="st">'imbalanced'</span>, n_splits<span class="op">=</span><span class="dv">5</span>, n_repeats<span class="op">=</span><span class="dv">3</span>, random_state<span class="op">=</span><span class="dv">123</span>):</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> cleaned_df</span>
@@ -1519,7 +1519,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="tuning-model-to-industry-and-domain-knowledge-avoiding-false-negatives">6. Tuning Model to industry and domain knowledge: avoiding false negatives</h3>
 <p>In cancer diagnostics, <strong>avoiding false negatives is particularly crucial</strong>. Missing a cancer diagnosis can lead to delayed treatment, disease progression, and reduced survival rates, which are far more serious than the consequences of false positives, such as psychological distress, additional testing, or unnecessary treatment. Consequently, cancer screening programs tend to prioritize AUC/sensitivity to minimize the number of missed cases, even if it results in a higher rate of false positives.</p>
 <p>In this context, we fit and test the models similarly to the previous approach, but we specifically evaluate and <strong>select the best model based on sensitivity</strong>.</p>
-<div id="e4c3a458" class="cell" data-execution_count="29">
+<div id="a550a0c4" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BaseModel:</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, cleaned_df, target_column, balance<span class="op">=</span><span class="st">'imbalanced'</span>, n_splits<span class="op">=</span><span class="dv">5</span>, n_repeats<span class="op">=</span><span class="dv">3</span>, random_state<span class="op">=</span><span class="dv">123</span>, evaluation_metric<span class="op">=</span><span class="st">'recall'</span>):</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> cleaned_df</span>
@@ -1901,31 +1901,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Time taken = 43.36 sec</p>
 <p>Best score = 0.921 using params: OrderedDict([(‘ccp_alpha’, 0.001131086677421503), (‘criterion’, ‘entropy’), (‘max_depth’, 24), (‘max_features’, ‘log2’), (‘min_samples_leaf’, 3), (‘min_samples_split’, 3)])</p>
 <p><strong>Test accuracy = 0.853</strong></p>
-<p><img src="images/clipboard-2144372909.png" class="img-fluid"></p>
-<p><img src="images/clipboard-3271840178.png" class="img-fluid" width="484"></p>
-<p><img src="images/clipboard-3492499816.png" class="img-fluid" width="471"></p>
-<p><img src="images/clipboard-759995167.png" class="img-fluid"></p>
+<p><img src="images/clipboard-2144372909.png" class="img-fluid" width="553"></p>
+<p><img src="images/clipboard-3271840178.png" class="img-fluid" width="424"></p>
+<p><img src="images/clipboard-3492499816.png" class="img-fluid" width="419"></p>
+<p><img src="images/clipboard-759995167.png" class="img-fluid" width="410"></p>
 <p>Evaluating RandomForest…</p>
 <p>Time taken = 1131.54 sec Best score = 0.99 using params: OrderedDict([(‘criterion’, ‘entropy’), (‘max_depth’, 27), (‘max_features’, ‘sqrt’), (‘min_samples_leaf’, 2), (‘min_samples_split’, 3), (‘n_estimators’, 82)])</p>
 <p><strong>Test accuracy = 0.975</strong></p>
-<p><img src="images/clipboard-472869976.png" class="img-fluid"></p>
-<p><img src="images/clipboard-3293245603.png" class="img-fluid"></p>
-<p><img src="images/clipboard-3815466419.png" class="img-fluid"></p>
-<p><img src="images/clipboard-1034884692.png" class="img-fluid"></p>
+<p><img src="images/clipboard-472869976.png" class="img-fluid" width="581"></p>
+<p><img src="images/clipboard-3293245603.png" class="img-fluid" width="427"></p>
+<p><img src="images/clipboard-3815466419.png" class="img-fluid" width="412"></p>
+<p><img src="images/clipboard-1034884692.png" class="img-fluid" width="416"></p>
 <p>Evaluating XGBoost…</p>
 <p>Time taken = 569.31 sec Best score = 0.999 using params: OrderedDict([(‘colsample_bytree’, 0.6654338738457878), (‘learning_rate’, 0.038882847597077025), (‘max_depth’, 21), (‘n_estimators’, 127), (‘subsample’, 0.7398225001914931)])</p>
 <p><strong>Test accuracy = 0.91</strong></p>
-<p><img src="images/clipboard-1553979538.png" class="img-fluid"></p>
-<p><img src="images/clipboard-1898839044.png" class="img-fluid"></p>
-<p><img src="images/clipboard-414980368.png" class="img-fluid"></p>
-<p><img src="images/clipboard-2446320798.png" class="img-fluid"></p>
+<p><img src="images/clipboard-1553979538.png" class="img-fluid" width="560"></p>
+<p><img src="images/clipboard-1898839044.png" class="img-fluid" width="440"></p>
+<p><img src="images/clipboard-414980368.png" class="img-fluid" width="447"></p>
+<p><img src="images/clipboard-2446320798.png" class="img-fluid" width="446"></p>
 <p>Evaluating LightGBM…</p>
 <p>Time taken = 259.26 sec Best score = 1.0 using params: OrderedDict([(‘colsample_bytree’, 0.8840100626990215), (‘learning_rate’, 0.017347709137475083), (‘max_depth’, 20), (‘n_estimators’, 132), (‘subsample’, 0.9722507666816909)])</p>
 <p><strong>Test accuracy = 0.67</strong></p>
-<p><img src="images/clipboard-2294252204.png" class="img-fluid"></p>
-<p><img src="images/clipboard-3824491189.png" class="img-fluid"></p>
-<p><img src="images/clipboard-4063952050.png" class="img-fluid"></p>
-<p><img src="images/clipboard-1205127027.png" class="img-fluid"></p>
+<p><img src="images/clipboard-2294252204.png" class="img-fluid" width="554"></p>
+<p><img src="images/clipboard-3824491189.png" class="img-fluid" width="432"></p>
+<p><img src="images/clipboard-4063952050.png" class="img-fluid" width="447"></p>
+<p><img src="images/clipboard-1205127027.png" class="img-fluid" width="447"></p>
 </section>
 <section id="model-evaluation-summary" class="level3">
 <h3 class="anchored" data-anchor-id="model-evaluation-summary">7. Model Evaluation Summary</h3>
@@ -2160,7 +2160,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <col style="width: 16%">
 <col style="width: 16%">
 <col style="width: 16%">
-<col style="width: 18%">
+<col style="width: 16%">
 <col style="width: 16%">
 <col style="width: 16%">
 </colgroup>
